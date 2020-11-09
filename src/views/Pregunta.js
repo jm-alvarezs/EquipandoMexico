@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {View, Text, ActivityIndicator, Button} from 'react-native';
 import {PreguntasContext} from '../context/PreguntasContext';
-import {colors, elements, layout, text} from '../styles';
+import {colors, layout, text} from '../styles';
 
 const Pregunta = () => {
   const {pregunta, getPregunta, getPreguntas} = useContext(PreguntasContext);
