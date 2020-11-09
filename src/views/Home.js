@@ -7,10 +7,9 @@ import Diagnostico from './Diagnostico';
 import Contenido from './Contenido';
 import Agenda from './Agenda';
 import Expertos from './Expertos';
+import {colors} from '../styles';
 
 const Tab = createBottomTabNavigator();
-
-const color = '#276BA5';
 
 const size = 25;
 
@@ -22,8 +21,9 @@ export default function App() {
           name="Expertos"
           component={Expertos}
           options={{
+            tabBarLabel: '',
             tabBarIcon: () => (
-              <FontAwesome name="user" color={color} size={size} />
+              <FontAwesome name="user" color={colors.dark} size={size} />
             ),
           }}
         />
@@ -31,8 +31,9 @@ export default function App() {
           name="Agenda"
           component={Agenda}
           options={{
+            tabBarLabel: '',
             tabBarIcon: () => (
-              <FontAwesome name="calendar" color={color} size={size} />
+              <FontAwesome name="calendar" color={colors.accent} size={size} />
             ),
           }}
         />
@@ -40,8 +41,9 @@ export default function App() {
           name="Contenido"
           component={Contenido}
           options={{
+            tabBarLabel: '',
             tabBarIcon: () => (
-              <FontAwesome name="play-circle" color={color} size={size} />
+              <FontAwesome name="play-circle" color={colors.accent} size={65} />
             ),
           }}
         />
@@ -49,8 +51,9 @@ export default function App() {
           name="Diagnóstico"
           component={Diagnostico}
           options={{
+            tabBarLabel: '',
             tabBarIcon: () => (
-              <FontAwesome name="clipboard" color={color} size={size} />
+              <FontAwesome name="clipboard" color={colors.dark} size={size} />
             ),
           }}
         />
@@ -58,8 +61,9 @@ export default function App() {
           name="Ajustes"
           component={Ajustes}
           options={{
+            tabBarLabel: '',
             tabBarIcon: () => (
-              <FontAwesome name="cog" color={color} size={size} />
+              <FontAwesome name="cog" color={colors.dark} size={size} />
             ),
           }}
         />
