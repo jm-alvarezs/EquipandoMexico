@@ -7,10 +7,15 @@
  */
 
 import React from 'react';
+import {PreguntasProvider} from './context/PreguntasContext';
 import Home from './views/Home';
 
 const App = () => {
-  return <Home />;
+  return (
+    <PreguntasProvider>
+      <Home />
+    </PreguntasProvider>
+  );
 };
 
 export default App;

@@ -8,6 +8,7 @@ import Contenido from './Contenido';
 import Agenda from './Agenda';
 import Expertos from './Expertos';
 import {colors} from '../styles';
+import Pregunta from './Pregunta';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="Pregunta" component={Pregunta} />
         <Tab.Screen
           name="Expertos"
           component={Expertos}

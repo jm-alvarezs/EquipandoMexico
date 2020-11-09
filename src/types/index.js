@@ -27,3 +27,8 @@ export const SHOW_SUCCESS = 'SHOW_SUCCESS';
  */
 export const HIDE_SPINNER = 'HIDE_SPINNER';
 export const SHOW_SPINNER = 'SHOW_SPINNER';
+/**
+ * Preguntas
+ */
+export const PREGUNTAS_RECIBIDAS = 'PREGUNTAS_RECIBIDAS';
+export const SET_PREGUNTA = 'SET_PREGUNTA';
