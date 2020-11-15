@@ -32,3 +32,13 @@ export const SHOW_SPINNER = 'SHOW_SPINNER';
  */
 export const PREGUNTAS_RECIBIDAS = 'PREGUNTAS_RECIBIDAS';
 export const SET_PREGUNTA = 'SET_PREGUNTA';
+/**
+ * Contenidos
+ */
+export const CONTENIDOS_RECIBIDOS = 'CONTENIDOS_RECIBIDOS';
+export const SET_CONTENIDO = 'SET_CONTENIDO';
+/**
+ * Expertos
+ */
+export const EXPERTOS_RECIBIDOS = 'EXPERTOS_RECIBIDOS';
+export const SET_EXPERTO = 'SET_EXPERTO';

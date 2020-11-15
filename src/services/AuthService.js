@@ -1,15 +1,15 @@
-import api from "./api";
-import firebase from "firebase";
-import "firebase/auth";
+import api from './api';
+import firebase from 'firebase';
+import 'firebase/auth';
 
-var firebaseConfig = {
-  apiKey: "AIzaSyBsmILT5BcTVhhwYeu13xEPaZ3WprcUDXI",
-  authDomain: "darlo-dev.firebaseapp.com",
-  databaseURL: "https://darlo-dev.firebaseio.com",
-  projectId: "darlo-dev",
-  storageBucket: "darlo-dev.appspot.com",
-  messagingSenderId: "943118696270",
-  appId: "1:943118696270:web:97db1d364eb16aa1d8e81f",
+let firebaseConfig = {
+  apiKey: 'AIzaSyA7r9nR8yT4AVyf-w227yFicMZF_LTuN6g',
+  authDomain: 'moviles-dev.firebaseapp.com',
+  databaseURL: 'https://moviles-dev.firebaseio.com',
+  projectId: 'moviles-dev',
+  storageBucket: 'moviles-dev.appspot.com',
+  messagingSenderId: '865479926197',
+  appId: '1:865479926197:web:679627c707e50a4b8279fc',
 };
 
 // Initialize Firebase
@@ -26,7 +26,7 @@ export default {
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
         return getToken().then((token) => {
-          api.defaults.headers.common["Authorization"] = token;
+          api.defaults.headers.common['Authorization'] = token;
           return user;
         });
       }),
@@ -34,7 +34,7 @@ export default {
     auth.onAuthStateChanged((user) => {
       if (user) {
         getToken().then((token) => {
-          api.defaults.headers.common["Authorization"] = token;
+          api.defaults.headers.common['Authorization'] = token;
           if (success) success(user);
         });
       } else {
