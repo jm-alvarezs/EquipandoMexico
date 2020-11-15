@@ -64,26 +64,13 @@ const Agenda = () => {
         </View>
         <Button
           title="Agendar"
-          containerStyle={[agendaStyles.mainButton, style.shadow]}
-          buttonStyle={[agendaStyles.mainButtonInner]}
+          containerStyle={[style.mainButton, style.shadow]}
+          buttonStyle={[style.mainButtonInner]}
           onPress={() => postCita(cita)}
         />
       </View>
     </Screen>
   );
 };
-
-const agendaStyles = StyleSheet.create({
-  mainButton: {
-    backgroundColor: colors.blue,
-    borderRadius: 100,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  mainButtonInner: {
-    backgroundColor: 'transparent',
-  },
-});
 
 export default Agenda;

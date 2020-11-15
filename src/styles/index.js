@@ -56,6 +56,19 @@ export const style = StyleSheet.create({
   my: {
     marginVertical: 16,
   },
+  mt: {
+    marginTop: 16,
+  },
+  mainButton: {
+    backgroundColor: colors.blue,
+    borderRadius: 100,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mainButtonInner: {
+    backgroundColor: 'transparent',
+  },
 });
 
 export const layout = StyleSheet.create({

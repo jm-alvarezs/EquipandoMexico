@@ -1,7 +1,8 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, ActivityIndicator} from 'react-native';
 import ExpertoCard from '../components/ExpertoCard';
 import {ExpertosContext} from '../context/ExpertosContext';
+import {colors, style, text} from '../styles';
 import Screen from './Screen';
 
 const Expertos = () => {
@@ -17,12 +18,13 @@ const Expertos = () => {
         <ExpertoCard key={experto.idExperto} experto={experto} />
       ));
     }
+    return <ActivityIndicator color={colors.dark} />;
   };
 
   return (
     <Screen title="Expertos">
-      <View>
-        <Text>Expertos</Text>
+      <View style={[style.padding, {paddingTop: 0}]}>
+        <Text style={[text.h1, style.bold]}>Expertos</Text>
         <ScrollView>{renderExpertos()}</ScrollView>
       </View>
     </Screen>

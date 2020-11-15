@@ -4,7 +4,8 @@ import {colors, layout, style} from '../styles';
 
 const Header = ({title}) => {
   return (
-    <View style={[layout.row, headerStyle.container, style.shadow]}>
+    <View
+      style={[layout.row, headerStyle.container, style.shadow, style.padding]}>
       <View style={[layout.third]}></View>
       <View style={[layout.third, layout.center]}>
         <Text style={[style.textWhite, style.bold]}>{title}</Text>
