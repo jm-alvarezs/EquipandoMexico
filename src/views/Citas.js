@@ -18,7 +18,7 @@ const Citas = () => {
 
   return (
     <View>
-      <Text>Citas</Text>
+      <Text>Mis Citas</Text>
       <ScrollView>{renderCitas()}</ScrollView>
     </View>
   );
