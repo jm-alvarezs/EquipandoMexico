@@ -11,6 +11,7 @@ import {colors} from '../styles';
 import {UserContext} from '../context/UserContext';
 import SignUp from './SignUp';
 import Login from './Login';
+import Code from './Code';
 
 const Tab = createBottomTabNavigator();
 
@@ -98,6 +99,11 @@ export default function App() {
         <AuthTab.Screen
           name="Login"
           component={Login}
+          options={{tabBarVisible: false}}
+        />
+        <AuthTab.Screen
+          name="Code"
+          component={Code}
           options={{tabBarVisible: false}}
         />
       </AuthTab.Navigator>

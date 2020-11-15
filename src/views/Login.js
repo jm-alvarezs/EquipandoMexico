@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {Card, Button} from 'react-native-elements';
 import {UserContext} from '../context/UserContext';
@@ -9,13 +9,19 @@ import {useNavigation} from '@react-navigation/native';
 const SignUp = () => {
   const [telefono, setTelefono] = useState('');
 
-  const {signIn} = useContext(UserContext);
+  const {signInPhone} = useContext(UserContext);
 
   const navigation = useNavigation();
 
   const handleSubmit = () => {
-    signIn(email, password);
+    signInPhone(telefono);
   };
+
+  useEffect(() => {
+    if (confirmation) {
+      navigation.navigate('Code');
+    }
+  }, [confirmation]);
 
   return (
     <Screen title="Equipando">
