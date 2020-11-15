@@ -42,3 +42,9 @@ export const SET_CONTENIDO = 'SET_CONTENIDO';
  */
 export const EXPERTOS_RECIBIDOS = 'EXPERTOS_RECIBIDOS';
 export const SET_EXPERTO = 'SET_EXPERTO';
+/**
+ * Citas
+ */
+export const CITAS_RECIBIDAS = 'CITAS_RECIBIDAS';
+export const SET_CITA = 'SET_CITA';
+export const SET_PROPIEDAD_CITA = 'SET_PROPIEDAD_CITA';
