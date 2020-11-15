@@ -1,28 +1,51 @@
 import React, {useContext, useState} from 'react';
-import {View, Text, Button, TextInput} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
+import {Card, Button} from 'react-native-elements';
 import {UserContext} from '../context/UserContext';
+import {style, text, colors} from '../styles';
+import Screen from './Screen';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [telefono, setTelefono] = useState('');
 
   const {signIn} = useContext(UserContext);
+
+  const navigation = useNavigation();
 
   const handleSubmit = () => {
     signIn(email, password);
   };
 
   return (
-    <View>
-      <Text>Entrar</Text>
-      <TextInput onChangeText={(email) => setEmail(email)} value={email} />
-      <TextInput
-        onChangeText={(password) => setPassword(password)}
-        value={password}
-        secureTextEntry
-      />
-      <Button title="Entrar" onPress={handleSubmit} />
-    </View>
+    <Screen title="Equipando">
+      <View style={[style.padding, {paddingVertical: 0}]}>
+        <Text style={[text.h1, style.bold]}>Entrar</Text>
+      </View>
+      <Card style={[style.shadow]}>
+        <Text>Número de Teléfono</Text>
+        <TextInput
+          onChangeText={(telefono) => setTelefono(telefono)}
+          value={telefono}
+        />
+        <Button
+          title="Entrar"
+          containerStyle={[style.mainButton]}
+          buttonStyle={[style.mainButtonInner]}
+          onPress={handleSubmit}
+        />
+      </Card>
+      <View style={[style.padding, {paddingTop: 0}]}>
+        <Text style={[style.mt]}>
+          ¿Aún no tienes una cuenta?{' '}
+          <Text
+            style={{color: colors.blue}}
+            onPress={() => navigation.navigate('SignUp')}>
+            Regístrate
+          </Text>
+        </Text>
+      </View>
+    </Screen>
   );
 };
 
