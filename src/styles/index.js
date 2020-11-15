@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 export const colors = {
   accent: '#276BA5',
   dark: '#2b2b2b',
+  blue: 'rgba(39,107,165,1)',
 };
 
 export const elements = StyleSheet.create({
@@ -29,6 +30,34 @@ export const text = StyleSheet.create({
   },
 });
 
+export const style = StyleSheet.create({
+  textWhite: {
+    color: '#fff',
+  },
+  bold: {
+    fontWeight: 'bold',
+  },
+  shadow: {
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 60,
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
+  },
+  padding: {
+    padding: 16,
+  },
+  mx0: {
+    marginHorizontal: 0,
+  },
+  my: {
+    marginVertical: 16,
+  },
+});
+
 export const layout = StyleSheet.create({
   row: {
     flexDirection: 'row',
@@ -37,6 +66,13 @@ export const layout = StyleSheet.create({
   },
   half: {
     width: '50%',
+  },
+  third: {
+    width: '30%',
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   padding: {
     padding: 16,

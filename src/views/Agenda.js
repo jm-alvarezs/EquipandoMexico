@@ -1,11 +1,18 @@
-import React, {useContext, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {Button} from 'react-native-elements';
+import {Card, Button} from 'react-native-elements';
 import {CitasContext} from '../context/CitasContext';
+import {ExpertosContext} from '../context/ExpertosContext';
+import {colors, style, text} from '../styles';
+import Screen from './Screen';
 
 const Agenda = () => {
-  const [cita, setCita] = useState({});
+  const [cita, setCita] = useState({
+    fecha: new Date(),
+  });
+
+  const {experto} = useContext(ExpertosContext);
 
   const {postCita} = useContext(CitasContext);
 
@@ -28,29 +35,55 @@ const Agenda = () => {
     }
   };
 
+  const {fecha, hora} = cita;
+
   return (
-    <View>
-      <Text>Agenda</Text>
-      {renderExperto()}
-      <Card>
-        Dia{' '}
-        <DatePicker
-          mode="date"
-          onDateChange={(date) => setCita({...cita, fecha: date})}
+    <Screen title="Agenda">
+      <View style={[style.padding, {paddingTop: 0}]}>
+        <Text style={[text.h1, style.bold]}>Agenda</Text>
+        {renderExperto()}
+        <Card containerStyle={[style.mx0]}>
+          <Text>Dia</Text>
+          <DatePicker
+            date={fecha}
+            mode="date"
+            onDateChange={(date) => setCita({...cita, fecha: date})}
+          />
+        </Card>
+        <Card containerStyle={[style.mx0]}>
+          <Text>Hora</Text>
+          <DatePicker
+            date={fecha}
+            mode="time"
+            onDateChange={(time) => setCita({...cita, hora: time})}
+          />
+        </Card>
+        <View style={[style.my]}>
+          <Text style={[text.h4, style.bold]}>Políticas de Reservación</Text>
+          <Text>Hasta 15 minutos de tolerancia para respetar su cita</Text>
+        </View>
+        <Button
+          title="Agendar"
+          containerStyle={[agendaStyles.mainButton, style.shadow]}
+          buttonStyle={[agendaStyles.mainButtonInner]}
+          onPress={() => postCita(cita)}
         />
-      </Card>
-      <Card>
-        Hora{' '}
-        <DatePicker
-          mode="time"
-          onDateChange={(time) => setCita({...cita, hora: time})}
-        />
-      </Card>
-      <Text>Políticas de Reservación</Text>
-      <Text>Hasta 15 minutos de tolerancia para respetar su cita</Text>
-      <Button title="Agendar" onPress={() => postCita(cita)} />
-    </View>
+      </View>
+    </Screen>
   );
 };
+
+const agendaStyles = StyleSheet.create({
+  mainButton: {
+    backgroundColor: colors.blue,
+    borderRadius: 100,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mainButtonInner: {
+    backgroundColor: 'transparent',
+  },
+});
 
 export default Agenda;

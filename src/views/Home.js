@@ -18,7 +18,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Pregunta" component={Pregunta} />
         <Tab.Screen
           name="Expertos"
           component={Expertos}

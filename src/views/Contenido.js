@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import ContenidoCard from '../components/ContenidoCard';
 import {ContenidosContext} from '../context/ContenidosContext';
+import Screen from './Screen';
 
 const Contenido = () => {
   const {contenidos, getContenidos} = useContext(ContenidosContext);
@@ -22,10 +23,12 @@ const Contenido = () => {
   };
 
   return (
-    <View>
-      <Text>Contenido</Text>
-      <ScrollView>{renderContenidos()}</ScrollView>
-    </View>
+    <Screen title="Contenido">
+      <View>
+        <Text>Contenido</Text>
+        <ScrollView>{renderContenidos()}</ScrollView>
+      </View>
+    </Screen>
   );
 };
 

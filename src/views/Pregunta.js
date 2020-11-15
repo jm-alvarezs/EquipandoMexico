@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import {View, Text, ActivityIndicator, Button} from 'react-native';
 import {PreguntasContext} from '../context/PreguntasContext';
 import {colors, layout, text} from '../styles';
+import Screen from './Screen';
 
 const Pregunta = () => {
   const {pregunta, getPregunta, getPreguntas} = useContext(PreguntasContext);
@@ -36,7 +37,11 @@ const Pregunta = () => {
     return <ActivityIndicator color={colors.dark} />;
   };
 
-  return <View style={[layout.padding]}>{renderPregunta()}</View>;
+  return (
+    <Screen title="Pregunta">
+      <View style={[layout.padding]}>{renderPregunta()}</View>
+    </Screen>
+  );
 };
 
 export default Pregunta;
