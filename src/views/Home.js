@@ -20,7 +20,11 @@ const AuthTab = createBottomTabNavigator();
 const size = 25;
 
 export default function App() {
-  const {user} = React.useContext(UserContext);
+  const {user, userLoggedIn} = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    userLoggedIn();
+  }, []);
 
   if (user !== null) {
     return (
