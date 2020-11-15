@@ -90,8 +90,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthTab.Navigator>
-        <AuthTab.Screen name="SignUp" component={SignUp} />
-        <AuthTab.Screen name="Login" component={Login} />
+        <AuthTab.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{tabBarVisible: false}}
+        />
+        <AuthTab.Screen
+          name="Login"
+          component={Login}
+          options={{tabBarVisible: false}}
+        />
       </AuthTab.Navigator>
     </NavigationContainer>
   );

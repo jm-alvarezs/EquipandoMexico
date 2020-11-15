@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {Card, Button} from 'react-native-elements';
 import {UserContext} from '../context/UserContext';
-import {style, text, colors} from '../styles';
+import {style, text, colors, layout} from '../styles';
 import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
 
@@ -20,7 +20,7 @@ const SignUp = () => {
   return (
     <Screen title="Equipando">
       <View style={[style.padding, {paddingVertical: 0}]}>
-        <Text style={[text.h1, style.bold]}>Entrar</Text>
+        <Text style={[text.h1, style.bold, layout.center]}>Entrar</Text>
       </View>
       <Card style={[style.shadow]}>
         <Text>Número de Teléfono</Text>
