@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
+import {CitasContext} from '../context/CitasContext';
 
 const Cancelar = () => {
+  const {cita, deleteCita} = useContext(CitasContext);
+
   const renderCita = () => {
     if (cita && cita !== null) {
       return (
@@ -20,7 +23,7 @@ const Cancelar = () => {
       <Text>Precaución</Text>
       <Text>¿Deseas cancelar esta cita?</Text>
       {renderCita()}
-      <Button title="Cancelar" />
+      <Button title="Cancelar" onPress={() => deleteCita(cita)} />
     </View>
   );
 };

@@ -39,6 +39,11 @@ export const CitasProvider = ({children}) => {
     dispatch({tyoe: SET_PROPIEDAD_CITA, payload: {key, value}});
   };
 
+  const deleteCita = (cita) => {
+    const {idCita} = cita;
+    CitasService.deleteCita(idCita);
+  };
+
   return (
     <CitasContext.Provider
       value={{
@@ -47,6 +52,7 @@ export const CitasProvider = ({children}) => {
         getMisCitas,
         postCita,
         updateCita,
+        deleteCita,
         setPropiedadCita,
       }}>
       {children}

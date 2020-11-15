@@ -4,7 +4,7 @@ import DatePicker from 'react-native-date-picker';
 import {UserContext} from '../context/UserContext';
 
 const Ajustes = () => {
-  const {user} = useContext(UserContext);
+  const {user, setPropiedadUser} = useContext(UserContext);
 
   const {nombre, fecha_nacimiento} = user;
 
@@ -14,9 +14,16 @@ const Ajustes = () => {
       <Text>Notificaciones</Text>
       <Text>Datos de tu hijo(a)</Text>
       <Text>Nombre</Text>
-      <TextInput value={nombre} />
+      <TextInput
+        value={nombre}
+        onChangeText={(nombre) => setPropiedadUser('nombre', nombre)}
+      />
       <Text>Fecha de Nacimiento</Text>
-      <DatePicker date={fecha_nacimiento} mode="date" />
+      <DatePicker
+        date={fecha_nacimiento}
+        mode="date"
+        onDateChange={(date) => setPropiedadUser('fecha_nacimiento', date)}
+      />
     </View>
   );
 };
