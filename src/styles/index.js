@@ -59,6 +59,9 @@ export const style = StyleSheet.create({
   mt: {
     marginTop: 16,
   },
+  mb: {
+    marginBottom: 16,
+  },
   mainButton: {
     backgroundColor: colors.blue,
     borderRadius: 100,
@@ -86,6 +89,7 @@ export const layout = StyleSheet.create({
   center: {
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
   },
   padding: {
     padding: 16,
