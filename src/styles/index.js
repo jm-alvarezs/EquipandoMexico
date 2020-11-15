@@ -4,6 +4,7 @@ export const colors = {
   accent: '#276BA5',
   dark: '#2b2b2b',
   blue: 'rgba(39,107,165,1)',
+  danger: '#dc3545',
 };
 
 export const elements = StyleSheet.create({

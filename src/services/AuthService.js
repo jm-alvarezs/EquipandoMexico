@@ -30,6 +30,7 @@ export default {
           return user;
         });
       }),
+  signInPhone: (phoneNumber) => auth.signInWithPhoneNumber(phoneNumber),
   userLoggedIn: (success, error) =>
     auth.onAuthStateChanged((user) => {
       if (user) {

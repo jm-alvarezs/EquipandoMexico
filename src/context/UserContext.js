@@ -13,6 +13,7 @@ import {
   USER_CREATED,
   GUARDAR_USUARIO,
   EDITAR_USUARIO,
+  CONFIRM_RECIBIDO,
 } from '../types';
 import {displayError, displaySuccess} from '../utils';
 
@@ -145,9 +146,9 @@ export const UserProvider = ({children}) => {
       });
   }
 
-  function signUpPhone(nombre, phone) {
-    AuthService.signUpPhone(phone).then((res) => {
-      console.log(res);
+  function signInPhone(phone) {
+    AuthService.signInPhone(phone).then((confirmation) => {
+      dispatch({type: CONFIRM_RECIBIDO, payload: confirmation});
     });
   }
 
@@ -247,6 +248,7 @@ export const UserProvider = ({children}) => {
         signUp,
         signOut,
         cancelEdit,
+        signInPhone,
         userLoggedIn,
         updateUsuario,
         editarUsuario,
