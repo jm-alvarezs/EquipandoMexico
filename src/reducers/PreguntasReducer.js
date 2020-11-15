@@ -10,6 +10,18 @@ export default (state, {type, payload}) => {
         (pregunta) => parseInt(pregunta.orden) === parseInt(payload),
       );
       return {...state, pregunta};
+    case SET_RESPUESTA_PREGUNTA: {
+      const preguntas = [...state.preguntas];
+      const index = preguntas.findIndex(
+        (pregunta) => parseInt(pregunta.orden) === parseInt(payload.idPregunta),
+      );
+      const pregunta = {...state.pregunta};
+      pregunta.respuesta = payload.respuesta;
+      if (index !== -1) {
+        preguntas[index].respuesta = payload.respuesta;
+      }
+      return {...state, preguntas};
+    }
     default:
       return state;
   }
