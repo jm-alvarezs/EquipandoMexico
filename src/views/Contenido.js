@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import ContenidoCard from '../components/ContenidoCard';
+import {ContenidosContext} from '../context/ContenidosContext';
 
 const Contenido = () => {
+  const {contenidos, getContenidos} = useContext(ContenidosContext);
+
+  useEffect(() => {
+    getContenidos();
+  }, []);
+
   const renderContenidos = () => {
     if (contenidos && contenidos !== null) {
       return contenidos.map((contenido) => (
