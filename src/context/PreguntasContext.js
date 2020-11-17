@@ -1,7 +1,12 @@
 import React, {createContext, useReducer} from 'react';
 import PreguntasReducer from '../reducers/PreguntasReducer';
 import PreguntasService from '../services/PreguntasService';
-import {PREGUNTAS_RECIBIDAS, SET_PREGUNTA, SET_PROPIEDAD_USER} from '../types';
+import {
+  PREGUNTAS_RECIBIDAS,
+  SET_PREGUNTA,
+  SET_PROPIEDAD_USER,
+  SET_RESPUESTA_PREGUNTA,
+} from '../types';
 
 const initialState = {
   preguntas: null,
@@ -41,9 +46,19 @@ export const PreguntasProvider = ({children}) => {
     });
   }
 
+  const setRespuestaPregunta = (idPregunta, respuesta) => {
+    dispatch({type: SET_RESPUESTA_PREGUNTA, payload: {idPregunta, respuesta}});
+  };
+
   return (
     <PreguntasContext.Provider
-      value={{...state, getPregunta, getPreguntas, postPreguntas}}>
+      value={{
+        ...state,
+        getPregunta,
+        getPreguntas,
+        postPreguntas,
+        setRespuestaPregunta,
+      }}>
       {children}
     </PreguntasContext.Provider>
   );

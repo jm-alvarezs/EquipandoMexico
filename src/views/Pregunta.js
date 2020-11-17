@@ -3,17 +3,18 @@ import {View, Text, ActivityIndicator, Button} from 'react-native';
 import {PreguntasContext} from '../context/PreguntasContext';
 import {colors, layout, text} from '../styles';
 import Screen from './Screen';
+import {useRoute} from '@react-navigation/native';
 
 const Pregunta = () => {
-  const {pregunta, getPregunta, getPreguntas} = useContext(PreguntasContext);
+  const {pregunta, getPregunta, setRespuestaPregunta} = useContext(
+    PreguntasContext,
+  );
 
-  const numero = 1;
+  const route = useRoute();
 
   useEffect(() => {
-    getPreguntas();
-    setTimeout(() => {
-      getPregunta(numero);
-    }, 2000);
+    const {idPregunta} = route.params;
+    getPregunta(idPregunta);
   }, []);
 
   const renderPregunta = () => {
@@ -25,10 +26,20 @@ const Pregunta = () => {
           <Text style={[text.h4, layout.my]}>{pregunta.descripcion}</Text>
           <View style={[layout.row]}>
             <View style={[layout.half]}>
-              <Button title="Sí" />
+              <Button
+                title="Sí"
+                onPress={() =>
+                  setRespuestaPregunta(route.params.idPregunta, 'Si')
+                }
+              />
             </View>
             <View style={[layout.half]}>
-              <Button title="No" />
+              <Button
+                title="No"
+                onPress={() =>
+                  setRespuestaPregunta(route.params.idPregunta, 'No')
+                }
+              />
             </View>
           </View>
         </>
