@@ -27,8 +27,13 @@ export const ExpertosProvider = ({children}) => {
     });
   };
 
+  const postExperto = (experto) => {
+    ExpertosService.postExperto(experto);
+  };
+
   return (
-    <ExpertosContext.Provider value={{...state, getExperto, getExpertos}}>
+    <ExpertosContext.Provider
+      value={{...state, getExperto, getExpertos, postExperto}}>
       {children}
     </ExpertosContext.Provider>
   );

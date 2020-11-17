@@ -5,4 +5,5 @@ const route = '/expertos';
 export default {
   getExpertos: () => api.get(route),
   getExperto: (idExperto) => api.get(`${route}/${idExperto}`),
+  postExperto: (experto) => api.post(route, {...experto}),
 };
