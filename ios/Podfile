@@ -12,6 +12,8 @@ target 'EquipandoMexico' do
 
   pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
 
+  pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
+
   target 'EquipandoMexicoTests' do
     inherit! :complete
     # Pods for testing
