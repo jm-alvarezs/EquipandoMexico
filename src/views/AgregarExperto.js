@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {View, Text, TextInput} from 'react-native';
+import DocumentPicker from 'react-native-document-picker';
 import {Button} from 'react-native-elements';
 import {ExpertosContext} from '../context/ExpertosContext';
 import {style, text} from '../styles';
@@ -9,8 +10,16 @@ const AgregarExperto = () => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [ubicacion, setUbicacion] = useState('');
+  const [file, setFile] = useState(null);
 
   const {postExperto} = useContext(ExpertosContext);
+
+  const handleFile = async () => {
+    const result = await DocumentPicker.pick({
+      type: [DocumentPicker.types.images],
+    });
+    setFile(file);
+  };
 
   return (
     <Screen title="Agregar Experto">
@@ -31,11 +40,13 @@ const AgregarExperto = () => {
           value={ubicacion}
           onChangeText={(ubicacion) => setUbicacion(ubicacion)}
         />
+        <Text>Fotografía (opcional)</Text>
+        <Button title="Seleccionar Archivo" onPress={handleFile} />
         <Button
           title="Guardar"
           containerStyle={[style.mainButton]}
           buttonStyle={[style.mainButtonInner]}
-          onPress={() => postExperto(nombre, descripcion, ubicacion)}
+          onPress={() => postExperto(nombre, descripcion, ubicacion, file)}
         />
       </View>
     </Screen>
