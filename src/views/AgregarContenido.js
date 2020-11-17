@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {TextInput} from 'react-native';
 import {Button} from 'react-native-elements';
 import {ContenidosContext} from '../context/ContenidosContext';
-import {style} from '../styles';
+import {style, text} from '../styles';
 import Screen from './Screen';
 
 const AgregarContenido = () => {
@@ -16,16 +16,16 @@ const AgregarContenido = () => {
   return (
     <Screen title="Agregar Contenido">
       <View style={[style.padding, {paddingTop: 0}]}>
-        <Text>Contenido</Text>
+        <Text style={[text.h1]}>Contenido</Text>
         <TextInput
           value={titulo}
           onChangeText={(titulo) => setTitulo(titulo)}
         />
-        <Text>Tipo de Contenido</Text>
+        <Text style={[text.h3]}>Tipo de Contenido</Text>
         <TextInput value={tipo} onChangeText={(tipo) => setTipo(tipo)} />
-        <Text>Tema</Text>
+        <Text style={[text.h3]}>Tema</Text>
         <TextInput value={tema} onChangeText={(tema) => setTema(tema)} />
-        <Text>Contenido</Text>
+        <Text style={[text.h3]}>Contenido</Text>
         <TextInput
           value={contenido}
           onChangeText={(contenido) => setContenido(contenido)}
