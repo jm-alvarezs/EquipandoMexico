@@ -27,8 +27,13 @@ export const ContenidosProvider = ({children}) => {
     });
   };
 
+  const postContenido = (contenido) => {
+    ContenidosService.postContenido(contenido);
+  };
+
   return (
-    <ContenidosContext.Provider value={{...state, getContenido, getContenidos}}>
+    <ContenidosContext.Provider
+      value={{...state, getContenido, getContenidos, postContenido}}>
       {children}
     </ContenidosContext.Provider>
   );

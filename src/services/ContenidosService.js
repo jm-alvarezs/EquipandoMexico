@@ -6,4 +6,5 @@ export default {
   getContenidos: (limit, offset) =>
     api.get(`${route}?limit=${limit}&offset=${offset}`),
   getContenido: (idContenido) => api.get(`${route}/${idContenido}`),
+  postContenido: (contenido) => api.post(route, {...contenido}),
 };
