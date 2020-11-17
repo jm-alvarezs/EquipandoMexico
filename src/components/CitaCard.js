@@ -11,7 +11,10 @@ const CitaCard = ({cita}) => {
       <Text>{ubicacion}</Text>
       <Text>Día {moment(fecha_hora).format('DD MMM YYYY')}</Text>
       <Text>Hora {moment(fecha_hora).format('HH:mm')}</Text>
-      <Button title="Cancelar" />
+      <Button
+        title="Cancelar"
+        onPress={() => navigation.navigate('Cancelar', {idCita: cita.idCita})}
+      />
     </Card>
   );
 };
