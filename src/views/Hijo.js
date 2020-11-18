@@ -21,8 +21,8 @@ const Hijo = () => {
 
   const handleSubmit = () => {
     if (moment(fechaNacimiento).isValid()) {
-      fechaNacimiento = moment(fechaNacimiento).format('YYYY-MM-DD');
-      postHijo(nombre, fechaNacimiento, sexo);
+      const fecha = moment(fechaNacimiento).format('YYYY-MM-DD');
+      postHijo(nombre, fecha, sexo);
     }
   };
 

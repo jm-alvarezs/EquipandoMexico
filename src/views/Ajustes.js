@@ -3,13 +3,13 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {Button} from 'react-native-elements';
 import DatePicker from '../components/DatePicker';
 import {UserContext} from '../context/UserContext';
-import {style, text} from '../styles';
+import {colors, style, text} from '../styles';
 import Screen from './Screen';
 import moment from 'moment';
 
 const Ajustes = () => {
   const [editMode, setEditMode] = useState(false);
-  const {user, setPropiedadUser, updateHijo} = useContext(UserContext);
+  const {user, setPropiedadUser, updateHijo, signOut} = useContext(UserContext);
   const [show, setShow] = useState(false);
 
   const renderUsuario = () => {
@@ -80,6 +80,16 @@ const Ajustes = () => {
         <Text>Notificaciones</Text>
         <Text style={[text.h2, style.bold, style.mt]}>Datos de tu hijo(a)</Text>
         {renderUsuario()}
+        <Button
+          title="Cerrar Sesión"
+          containerStyle={[
+            style.mainButtonInner,
+            {width: 100, marginTop: 32, padding: 0},
+          ]}
+          buttonStyle={{backgroundColor: 'transparent', margin: 0, padding: 0}}
+          titleStyle={{color: colors.danger}}
+          onPress={signOut}
+        />
       </View>
     </Screen>
   );
