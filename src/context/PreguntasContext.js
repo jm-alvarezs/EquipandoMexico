@@ -32,7 +32,6 @@ export const PreguntasProvider = ({children}) => {
   function getPreguntas() {
     PreguntasService.getPreguntas().then((res) => {
       //const { preguntas } = res.data;
-      console.log(preguntas);
       dispatch({type: PREGUNTAS_RECIBIDAS, payload: preguntas});
     });
   }

@@ -7,7 +7,8 @@ export default {
   postUsuario: (uid, nombre, correo, telefono) =>
     api.post('/signup', {uid, nombre, correo, telefono}),
   putUsuario: (usuario) => api.put(route, {...usuario}),
-  postHijo: (hijo) => api.post(`${route}/hijo`, {...hijo}),
+  postHijo: (hijo) => api.post('/usuario/hijo', {...hijo}),
+  putHijo: (hijo) => api.put('/usuario/hijo', {...hijo}),
   updateCorreo: (correo) => api.put(`${route}/correo`, {correo}),
   setToken: (token) => (api.defaults.headers.common['Authorization'] = token),
 };

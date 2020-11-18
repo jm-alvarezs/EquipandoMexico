@@ -19,6 +19,8 @@ import Pregunta from './Pregunta';
 import Cancelar from './Cancelar';
 import Gracias from './Gracias';
 import Citas from './Citas';
+import Hijo from './Hijo';
+import moment from 'moment';
 
 const Tab = createBottomTabNavigator();
 
@@ -109,16 +111,18 @@ const StackExpertos = () => {
 };
 
 const App = () => {
-  const {user, userLoggedIn} = useContext(UserContext);
+  const {user, hijoCreated, userLoggedIn} = useContext(UserContext);
 
   useEffect(() => {
     userLoggedIn();
   }, []);
 
-  if (user !== null) {
-    return (
-      <NavigationContainer>
-        <Tab.Navigator>
+  const renderContenidos = () => {
+    const {fecha_nacimiento} = user;
+    const diff = moment().diff(fecha_nacimiento, 'months');
+    if (diff > 53 && diff < 67) {
+      return (
+        <>
           <Tab.Screen
             name="Expertos"
             component={StackExpertos}
@@ -135,30 +139,12 @@ const App = () => {
             options={{
               tabBarLabel: '',
               tabBarIcon: () => (
-                <FontAwesome
-                  name="calendar"
-                  color={colors.accent}
-                  size={size}
-                />
+                <FontAwesome name="calendar" color={colors.dark} size={size} />
               ),
             }}
           />
           <Tab.Screen
-            name="Contenidos"
-            component={StackContenidos}
-            options={{
-              tabBarLabel: '',
-              tabBarIcon: () => (
-                <FontAwesome
-                  name="play-circle"
-                  color={colors.accent}
-                  size={65}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Diagnóstico"
+            name="Diagnostico"
             component={StackDiagnostico}
             options={{
               tabBarLabel: '',
@@ -167,6 +153,39 @@ const App = () => {
               ),
             }}
           />
+        </>
+      );
+    }
+    return (
+      <Tab.Screen
+        name="Contenidos"
+        component={StackContenidos}
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: () => (
+            <FontAwesome name="play" color={colors.dark} size={25} />
+          ),
+        }}
+      />
+    );
+  };
+
+  const renderRouter = () => {
+    if (user !== null) {
+      if (user.fecha_nacimiento === null && !hijoCreated) {
+        return (
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Hijo"
+              component={Hijo}
+              options={{tabBarVisible: false}}
+            />
+          </Tab.Navigator>
+        );
+      }
+      return (
+        <Tab.Navigator initialRouteName="Diagnostico">
+          {renderContenidos()}
           <Tab.Screen
             name="Ajustes"
             component={Ajustes}
@@ -178,11 +197,9 @@ const App = () => {
             }}
           />
         </Tab.Navigator>
-      </NavigationContainer>
-    );
-  }
-  return (
-    <NavigationContainer>
+      );
+    }
+    return (
       <AuthTab.Navigator>
         <AuthTab.Screen
           name="SignUp"
@@ -200,8 +217,10 @@ const App = () => {
           options={{tabBarVisible: false}}
         />
       </AuthTab.Navigator>
-    </NavigationContainer>
-  );
+    );
+  };
+
+  return <NavigationContainer>{renderRouter()}</NavigationContainer>;
 };
 
 export default App;

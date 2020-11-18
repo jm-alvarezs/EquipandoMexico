@@ -10,13 +10,15 @@ target 'EquipandoMexico' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
 
   pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
 
   pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
+
 
   target 'EquipandoMexicoTests' do
     inherit! :complete

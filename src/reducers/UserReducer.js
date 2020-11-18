@@ -8,6 +8,7 @@ import {
   SET_PROPIEDAD_USER,
   SET_PROPIEDAD_LOGIN,
   CONFIRM_RECIBIDO,
+  HIJO_CREATED,
 } from '../types';
 
 export default (state, {type, payload}) => {
@@ -36,6 +37,9 @@ export default (state, {type, payload}) => {
       return {...state, [key]: value};
     case CONFIRM_RECIBIDO:
       return {...state, confirmation: payload};
+    case HIJO_CREATED: {
+      return {...state, hijoCreated: true};
+    }
     default:
       return {...state};
   }

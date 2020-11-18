@@ -39,7 +39,7 @@ const Contenido = () => {
   return (
     <Screen title="Contenido">
       <View style={[style.padding, {paddingTop: 0}]}>
-        <Text style={[text.h1, style.bold]}>Contenido</Text>
+        <Text style={[text.h1, style.bold, style.mb]}>Contenidos</Text>
         <ScrollView>{renderContenidos()}</ScrollView>
         <Button
           title="+ Contenido"

@@ -16,6 +16,7 @@ import {
   CONFIRM_RECIBIDO,
 } from '../types';
 import {displayError, displaySuccess} from '../utils';
+import moment from 'moment';
 
 const initialState = {
   user: null,
@@ -24,6 +25,7 @@ const initialState = {
   telefono: null,
   cuenta: null,
   direccion: null,
+  hijoCreated: null,
 };
 
 export const UserContext = createContext(initialState);
@@ -38,6 +40,7 @@ export const UserProvider = ({children}) => {
         UsuarioService.getUsuario()
           .then((res) => {
             let {usuario} = res.data;
+            console.log(usuario);
             dispatch({
               type: LOGIN,
               payload: usuario,
@@ -160,6 +163,7 @@ export const UserProvider = ({children}) => {
   }
 
   function setPropiedadUser(key, value) {
+    console.log(key, value);
     if (key === 'idAdjunto') {
       dispatch({type: SET_PROPIEDAD_USER, payload: {key: 'file', value}});
       if (!value) dispatch({type: SET_PROPIEDAD_USER, payload: {key, value}});
@@ -246,8 +250,13 @@ export const UserProvider = ({children}) => {
     });
   }
 
+  function postHijo(nombre, fecha, sexo) {
+    fecha = moment(fecha).format('YYYY-MM-DD');
+    UsuarioService.postHijo({nombre, fecha, sexo});
+  }
+
   function updateHijo(hijo) {
-    UsuarioService.postHijo({...hijo, nombre: hijo.nombre_hijo});
+    UsuarioService.putHijo({...hijo, nombre: hijo.nombre_hijo});
   }
 
   return (
@@ -257,6 +266,7 @@ export const UserProvider = ({children}) => {
         signIn,
         signUp,
         signOut,
+        postHijo,
         getUsuario,
         cancelEdit,
         updateHijo,

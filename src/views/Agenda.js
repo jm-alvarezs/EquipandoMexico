@@ -1,16 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import DatePicker from 'react-native-date-picker';
+import {View, Text, TouchableOpacity} from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {Card, Button} from 'react-native-elements';
 import {CitasContext} from '../context/CitasContext';
 import {ExpertosContext} from '../context/ExpertosContext';
-import {colors, style, text} from '../styles';
+import {style, text} from '../styles';
 import Screen from './Screen';
+import moment from 'moment';
+import DatePicker from 'react-native-datepicker';
 
 const Agenda = () => {
   const [cita, setCita] = useState({
     fecha: new Date(),
   });
+
+  const [show, setShow] = useState(false);
 
   const {experto} = useContext(ExpertosContext);
 
@@ -44,11 +48,16 @@ const Agenda = () => {
         {renderExperto()}
         <Card containerStyle={[style.mx0]}>
           <Text>Dia</Text>
-          <DatePicker
-            date={fecha}
-            mode="date"
-            onDateChange={(date) => setCita({...cita, fecha: date})}
-          />
+          <TouchableOpacity onPress={() => setShow(!show)}>
+            {moment(date).format('DD MMM YYYY')}
+          </TouchableOpacity>
+          {show && (
+            <DateTimePicker
+              value={fecha}
+              mode="date"
+              onChange={(event, date) => setCita({...cita, fecha: date})}
+            />
+          )}
         </Card>
         <Card containerStyle={[style.mx0]}>
           <Text>Hora</Text>

@@ -10,6 +10,7 @@ export const EDITAR_USUARIO = 'EDITAR_USUARIO';
 export const GUARDAR_USUARIO = 'GUARDAR_USUARIO';
 export const CUENTA_RECIBIDA = 'CUENTA_RECIBIDA';
 export const CONFIRM_RECIBIDO = 'CONFIRM_RECIBIDO';
+export const HIJO_CREATED = 'HIJO_CREATED';
 /**
  * Modal
  */
