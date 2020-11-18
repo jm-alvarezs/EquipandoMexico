@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ajustes from './Ajustes';
 import Diagnostico from './Diagnostico';
@@ -12,12 +13,31 @@ import {UserContext} from '../context/UserContext';
 import SignUp from './SignUp';
 import Login from './Login';
 import Code from './Code';
+import AgregarExperto from './AgregarExperto';
 
 const Tab = createBottomTabNavigator();
 
 const AuthTab = createBottomTabNavigator();
 
 const size = 25;
+
+const StackExpertos = () => {
+  const ExpertosNavigator = createStackNavigator();
+  return (
+    <ExpertosNavigator.Navigator>
+      <ExpertosNavigator.Screen
+        name="Expertos"
+        component={Expertos}
+        options={{headerShown: false}}
+      />
+      <ExpertosNavigator.Screen
+        name="AgregarExperto"
+        component={AgregarExperto}
+        options={{headerShown: false}}
+      />
+    </ExpertosNavigator.Navigator>
+  );
+};
 
 const App = () => {
   const {user, userLoggedIn} = useContext(UserContext);
@@ -26,72 +46,64 @@ const App = () => {
     userLoggedIn();
   }, []);
 
-  if (user !== null) {
-    return (
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Expertos"
-            component={Expertos}
-            options={{
-              tabBarLabel: '',
-              tabBarIcon: () => (
-                <FontAwesome name="user" color={colors.dark} size={size} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Agenda"
-            component={Agenda}
-            options={{
-              tabBarLabel: '',
-              tabBarIcon: () => (
-                <FontAwesome
-                  name="calendar"
-                  color={colors.accent}
-                  size={size}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Contenido"
-            component={Contenido}
-            options={{
-              tabBarLabel: '',
-              tabBarIcon: () => (
-                <FontAwesome
-                  name="play-circle"
-                  color={colors.accent}
-                  size={65}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Diagnóstico"
-            component={Diagnostico}
-            options={{
-              tabBarLabel: '',
-              tabBarIcon: () => (
-                <FontAwesome name="clipboard" color={colors.dark} size={size} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Ajustes"
-            component={Ajustes}
-            options={{
-              tabBarLabel: '',
-              tabBarIcon: () => (
-                <FontAwesome name="cog" color={colors.dark} size={size} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
-  }
+  //if (user !== null) {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Expertos"
+          component={StackExpertos}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <FontAwesome name="user" color={colors.dark} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Agenda"
+          component={Agenda}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <FontAwesome name="calendar" color={colors.accent} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Contenido"
+          component={Contenido}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <FontAwesome name="play-circle" color={colors.accent} size={65} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Diagnóstico"
+          component={Diagnostico}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <FontAwesome name="clipboard" color={colors.dark} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Ajustes"
+          component={Ajustes}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <FontAwesome name="cog" color={colors.dark} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+  //}
   return (
     <NavigationContainer>
       <AuthTab.Navigator>

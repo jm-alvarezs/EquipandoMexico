@@ -1,5 +1,6 @@
 import React, {createContext, useReducer} from 'react';
 import ExpertosReducer from '../reducers/ExpertosReducer';
+import AdjuntosService from '../services/AdjuntosService';
 import ExpertosService from '../services/ExpertosService';
 import {EXPERTOS_RECIBIDOS, SET_EXPERTO} from '../types';
 
@@ -28,7 +29,19 @@ export const ExpertosProvider = ({children}) => {
   };
 
   const postExperto = (experto) => {
-    ExpertosService.postExperto(experto);
+    if (experto.file && experto.file !== null) {
+      const formData = new FormData();
+      formData.append('adjunto', experto.file);
+      AdjuntosService.postAdjunto(formData).then((res) => {
+        const {idAdjunto} = res.data;
+        experto.idAdjunto = idAdjunto;
+        let data = {...experto};
+        delete data.file;
+        ExpertosService.postExperto(data);
+      });
+    } else {
+      ExpertosService.postExperto(experto);
+    }
   };
 
   return (

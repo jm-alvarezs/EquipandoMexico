@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import {Button} from 'react-native-elements';
@@ -23,30 +23,34 @@ const AgregarExperto = () => {
 
   return (
     <Screen title="Agregar Experto">
-      <View>
-        <Text style={[text.h1]}>Experto</Text>
-        <Text style={[text.h3]}>Nombre</Text>
+      <View style={[style.padding, {paddingTop: 0}]}>
+        <Text style={[text.h1, style.mb]}>Experto</Text>
+        <Text style={[text.p, style.bold]}>Nombre</Text>
         <TextInput
           value={nombre}
           onChangeText={(nombre) => setNombre(nombre)}
         />
-        <Text style={[text.h3]}>Descripción</Text>
+        <Text style={[text.p, style.bold]}>Descripción</Text>
         <TextInput
           value={descripcion}
           onChangeText={(descripcion) => setDescripcion(descripcion)}
         />
-        <Text style={[text.h3]}>Ubicación</Text>
+        <Text style={[text.p, style.bold]}>Ubicación</Text>
         <TextInput
           value={ubicacion}
           onChangeText={(ubicacion) => setUbicacion(ubicacion)}
         />
-        <Text>Fotografía (opcional)</Text>
-        <Button title="Seleccionar Archivo" onPress={handleFile} />
+        <Text style={[text.p, style.bold]}>Fotografía (opcional)</Text>
+        <Button
+          title="Seleccionar Archivo"
+          onPress={handleFile}
+          containerStyle={[style.my]}
+        />
         <Button
           title="Guardar"
-          containerStyle={[style.mainButton]}
+          containerStyle={[style.mainButton, style.mt]}
           buttonStyle={[style.mainButtonInner]}
-          onPress={() => postExperto(nombre, descripcion, ubicacion, file)}
+          onPress={() => postExperto({nombre, descripcion, ubicacion, file})}
         />
       </View>
     </Screen>

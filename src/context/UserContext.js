@@ -56,11 +56,9 @@ export const UserProvider = ({children}) => {
   }
 
   function userLoggedIn() {
-    console.log('a');
     dispatch({type: SHOW_SPINNER});
     AuthService.userLoggedIn(
       () => {
-        console.log(user);
         UsuarioService.getUsuario()
           .then((res) => {
             let {usuario} = res.data;
@@ -99,7 +97,6 @@ export const UserProvider = ({children}) => {
     AuthService.signUp(correo, password)
       .then((user) => {
         const {uid} = user.user;
-        console.log(uid);
         dispatch({
           type: SET_PROPIEDAD_LOGIN,
           payload: {key: 'correo', value: correo},

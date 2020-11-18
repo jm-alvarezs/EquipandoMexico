@@ -1,5 +1,6 @@
 import React, {createContext, useReducer} from 'react';
 import ContenidosReducer from '../reducers/ContenidosReducer';
+import AdjuntosService from '../services/AdjuntosService';
 import ContenidosService from '../services/ContenidosService';
 import {CONTENIDOS_RECIBIDOS, SET_CONTENIDO} from '../types';
 
@@ -28,7 +29,35 @@ export const ContenidosProvider = ({children}) => {
   };
 
   const postContenido = (contenido) => {
-    ContenidosService.postContenido(contenido);
+    if (isNaN(contenido.idContenido)) {
+      if (contenido.file && contenido.file !== null) {
+        const formData = new FormData();
+        formData.append('adjunto', contenido.file);
+        AdjuntosService.postAdjunto(formData).then((res) => {
+          const {idAdjunto} = res.data;
+          contenido.idAdjunto = idAdjunto;
+          let data = {...contenido};
+          delete contenido.file;
+          ContenidosService.postContenido(data);
+        });
+      } else {
+        ContenidosService.postContenido(contenido);
+      }
+    } else {
+      if (contenido.file && contenido.file !== null) {
+        const formData = new FormData();
+        formData.append('adjunto', contenido.file);
+        AdjuntosService.postAdjunto(formData).then((res) => {
+          const {idAdjunto} = res.data;
+          contenido.idAdjunto = idAdjunto;
+          let data = {...contenido};
+          delete contenido.file;
+          ContenidosService.putContenido(data);
+        });
+      } else {
+        ContenidosService.putContenido(contenido);
+      }
+    }
   };
 
   return (

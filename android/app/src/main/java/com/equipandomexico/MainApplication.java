@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 import com.henninghall.date_picker.DatePickerPackage;

@@ -16,6 +16,8 @@ target 'EquipandoMexico' do
 
   pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'EquipandoMexicoTests' do
     inherit! :complete
     # Pods for testing
