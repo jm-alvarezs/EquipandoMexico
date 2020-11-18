@@ -28,7 +28,9 @@ const Code = () => {
         <Text style={[text.h1, style.bold, layout.center]}>
           Ingresa el código
         </Text>
-        <Text>En breve, te llegará un SMS con un código.</Text>
+        <Text style={[layout.center]}>
+          En breve, te llegará un SMS con un código.
+        </Text>
       </View>
       <Card style={[style.shadow]}>
         <Text>Ingresar el Código</Text>
@@ -42,7 +44,7 @@ const Code = () => {
       </Card>
       <View style={[style.padding, {paddingTop: 0}]}>
         <Text
-          style={{color: colors.danger}}
+          style={[style.mt, {color: colors.danger}]}
           onPress={() => navigation.navigate('Login')}>
           Cancelar
         </Text>

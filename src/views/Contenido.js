@@ -1,54 +1,41 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useContext, useEffect} from 'react';
-import {View, Text, ScrollView, ActivityIndicator} from 'react-native';
-import {Button} from 'react-native-elements';
-import ContenidoCard from '../components/ContenidoCard';
-import {ContenidosContext} from '../context/ContenidosContext';
-import {colors, style, text} from '../styles';
-import Screen from './Screen';
+import {useRoute} from '@react-navigation/native';
+import React from 'react';
+import {Button, Image} from 'react-native-elements';
+import {style} from '../styles';
+import {BASE_URL} from '../utils';
 
 const Contenido = () => {
-  const {contenidos, getContenidos} = useContext(ContenidosContext);
-
-  const navigation = useNavigation();
+  const route = useRoute();
+  const idContenido = route.params.idContenido;
 
   useEffect(() => {
-    getContenidos();
+    getContenido(idContenido);
   }, []);
 
-  const renderContenidos = () => {
-    if (contenidos && contenidos !== null) {
-      if (contenidos.length === 0) {
-        return (
-          <Text style={[text.p, style.mt]}>
-            Lo sentimos. Aún no hay contenido.
-          </Text>
-        );
-      }
-      return contenidos.map((contenido) => (
-        <ContenidoCard
-          idContenido={contenido.idContenido}
-          contenido={contenido}
-        />
-      ));
+  const renderContenido = () => {
+    if (contenido && contenido !== null) {
+      const {nombre, descripcion, enlace, idAdjunto} = contenido;
+      const src = `${BASE_URL}/adjuntos/${idAdjunto}`;
+      return (
+        <>
+          <Image source={{uri: src}} />
+          <Text>{nombre}</Text>
+          <Text>{descripcion}</Text>
+          {enlace !== null && (
+            <Button
+              title="Más Información"
+              containerStyle={[style.mainButton, style.mt]}
+              buttonStyle={[style.mainButtonInner]}
+            />
+          )}
+        </>
+      );
     }
-    return <ActivityIndicator color={colors.dark} />;
   };
 
   return (
     <Screen title="Contenido">
-      <View style={[style.padding, {paddingTop: 0}]}>
-        <Text style={[text.h1, style.bold]}>Contenido</Text>
-        <ScrollView>{renderContenidos()}</ScrollView>
-        <Button
-          title="+ Contenido"
-          containerStyle={[style.mainButton, style.mt]}
-          buttonStyle={[style.mainButtonInner]}
-          onPress={() => navigation.navigate('AgregarContenido')}
-        />
-      </View>
+      <View style={[style.padding, {paddingTop: 0}]}>{renderContenido()}</View>
     </Screen>
   );
 };
-
-export default Contenido;

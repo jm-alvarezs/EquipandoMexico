@@ -35,9 +35,13 @@ export const ContenidosProvider = ({children}) => {
         formData.append('adjunto', contenido.file);
         AdjuntosService.postAdjunto(formData).then((res) => {
           const {idAdjunto} = res.data;
-          contenido.idAdjunto = idAdjunto;
-          let data = {...contenido};
-          delete contenido.file;
+          let data = {
+            nombre: contenido.titulo,
+            descripcion: contenido.contenido,
+            idAdjunto,
+            tipo: contenido.tipo,
+            enlace: contenido.enlace,
+          };
           ContenidosService.postContenido(data);
         });
       } else {

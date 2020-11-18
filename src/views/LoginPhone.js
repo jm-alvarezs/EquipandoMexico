@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {Card, Button} from 'react-native-elements';
 import {UserContext} from '../context/UserContext';
@@ -6,17 +6,22 @@ import {style, text, colors, layout} from '../styles';
 import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const SignUp = () => {
+  const [telefono, setTelefono] = useState('');
 
-  const {signIn} = useContext(UserContext);
+  const {signInPhone, confirmation} = useContext(UserContext);
 
   const navigation = useNavigation();
 
   const handleSubmit = () => {
-    signIn(email, password);
+    signInPhone(telefono);
   };
+
+  useEffect(() => {
+    if (confirmation) {
+      navigation.navigate('Code');
+    }
+  }, [confirmation]);
 
   return (
     <Screen title="Equipando">
@@ -24,18 +29,10 @@ const Login = () => {
         <Text style={[text.h1, style.bold, layout.center]}>Entrar</Text>
       </View>
       <Card style={[style.shadow]}>
-        <Text style={[text.p, style.bold]}>Correo Electrónico</Text>
+        <Text>Número de Teléfono</Text>
         <TextInput
-          onChangeText={(email) => setEmail(email)}
-          value={email}
-          autoCapitalize="none"
-        />
-        <Text style={[text.p, style.bold]}>Contraseña</Text>
-        <TextInput
-          onChangeText={(password) => setPassword(password)}
-          value={password}
-          secureTextEntry
-          autoCapitalize="none"
+          onChangeText={(telefono) => setTelefono(telefono)}
+          value={telefono}
         />
         <Button
           title="Entrar"
@@ -58,4 +55,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

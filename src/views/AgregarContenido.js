@@ -11,6 +11,7 @@ const AgregarContenido = () => {
   const [tipo, setTipo] = useState('');
   const [contenido, setContenido] = useState('');
   const [file, setFile] = useState(null);
+  const [enlace, setEnlace] = useState('');
 
   const handleFile = async () => {
     const result = await DocumentPicker.pick({
@@ -36,6 +37,11 @@ const AgregarContenido = () => {
         <TextInput
           value={contenido}
           onChangeText={(contenido) => setContenido(contenido)}
+        />
+        <Text style={[text.p, style.bold]}>Enlace (opcional)</Text>
+        <TextInput
+          value={enlace}
+          onChangeText={(enlace) => setEnlace(enlace)}
         />
         <Text style={[text.p, style.bold]}>Multimedia</Text>
         <Button

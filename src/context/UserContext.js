@@ -246,6 +246,10 @@ export const UserProvider = ({children}) => {
     });
   }
 
+  function updateHijo(hijo) {
+    UsuarioService.postHijo({...hijo, nombre: hijo.nombre_hijo});
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -255,6 +259,7 @@ export const UserProvider = ({children}) => {
         signOut,
         getUsuario,
         cancelEdit,
+        updateHijo,
         signInPhone,
         userLoggedIn,
         updateUsuario,

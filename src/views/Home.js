@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ajustes from './Ajustes';
 import Diagnostico from './Diagnostico';
-import Contenido from './Contenido';
+import Contenido from './Contenidos';
 import Agenda from './Agenda';
 import Expertos from './Expertos';
 import {colors} from '../styles';
@@ -115,64 +115,72 @@ const App = () => {
     userLoggedIn();
   }, []);
 
-  //if (user !== null) {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Expertos"
-          component={StackExpertos}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: () => (
-              <FontAwesome name="user" color={colors.dark} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Citas"
-          component={StackAgenda}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: () => (
-              <FontAwesome name="calendar" color={colors.accent} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Contenidos"
-          component={StackContenidos}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: () => (
-              <FontAwesome name="play-circle" color={colors.accent} size={65} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Diagnóstico"
-          component={StackDiagnostico}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: () => (
-              <FontAwesome name="clipboard" color={colors.dark} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Ajustes"
-          component={Ajustes}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: () => (
-              <FontAwesome name="cog" color={colors.dark} size={size} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-  //}
+  if (user !== null) {
+    return (
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Expertos"
+            component={StackExpertos}
+            options={{
+              tabBarLabel: '',
+              tabBarIcon: () => (
+                <FontAwesome name="user" color={colors.dark} size={size} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Citas"
+            component={StackAgenda}
+            options={{
+              tabBarLabel: '',
+              tabBarIcon: () => (
+                <FontAwesome
+                  name="calendar"
+                  color={colors.accent}
+                  size={size}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Contenidos"
+            component={StackContenidos}
+            options={{
+              tabBarLabel: '',
+              tabBarIcon: () => (
+                <FontAwesome
+                  name="play-circle"
+                  color={colors.accent}
+                  size={65}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Diagnóstico"
+            component={StackDiagnostico}
+            options={{
+              tabBarLabel: '',
+              tabBarIcon: () => (
+                <FontAwesome name="clipboard" color={colors.dark} size={size} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Ajustes"
+            component={Ajustes}
+            options={{
+              tabBarLabel: '',
+              tabBarIcon: () => (
+                <FontAwesome name="cog" color={colors.dark} size={size} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
+  }
   return (
     <NavigationContainer>
       <AuthTab.Navigator>
