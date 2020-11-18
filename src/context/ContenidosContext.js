@@ -22,10 +22,7 @@ export const ContenidosProvider = ({children}) => {
   };
 
   const getContenido = (idContenido) => {
-    ContenidosService.getContenido(idContenido).then((res) => {
-      const {contenido} = res.data;
-      dispatch({type: SET_CONTENIDO, payload: contenido});
-    });
+    dispatch({type: SET_CONTENIDO, payload: idContenido});
   };
 
   const postContenido = (contenido) => {

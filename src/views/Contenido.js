@@ -1,12 +1,17 @@
 import {useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
+import {View, Text} from 'react-native';
 import {Button, Image} from 'react-native-elements';
-import {style} from '../styles';
+import {ContenidosContext} from '../context/ContenidosContext';
+import {style, text} from '../styles';
 import {BASE_URL} from '../utils';
+import Screen from './Screen';
 
 const Contenido = () => {
   const route = useRoute();
   const idContenido = route.params.idContenido;
+
+  const {contenido, getContenido} = useContext(ContenidosContext);
 
   useEffect(() => {
     getContenido(idContenido);
@@ -18,8 +23,8 @@ const Contenido = () => {
       const src = `${BASE_URL}/adjuntos/${idAdjunto}`;
       return (
         <>
-          <Image source={{uri: src}} />
-          <Text>{nombre}</Text>
+          <Image source={{uri: src}} containerStyle={{width: '100%'}} />
+          <Text style={[text.h1, style.mb, style.bold]}>{nombre}</Text>
           <Text>{descripcion}</Text>
           {enlace !== null && (
             <Button
@@ -39,3 +44,5 @@ const Contenido = () => {
     </Screen>
   );
 };
+
+export default Contenido;

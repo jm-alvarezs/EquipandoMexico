@@ -5,7 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ajustes from './Ajustes';
 import Diagnostico from './Diagnostico';
-import Contenido from './Contenidos';
+import Contenido from './Contenido';
+import Contenidos from './Contenidos';
 import Agenda from './Agenda';
 import Expertos from './Expertos';
 import {colors} from '../styles';
@@ -68,6 +69,11 @@ const StackContenidos = () => {
   const ContenidosNavigator = createStackNavigator();
   return (
     <ContenidosNavigator.Navigator>
+      <ContenidosNavigator.Screen
+        name="Contenidos"
+        component={Contenidos}
+        options={{headerShown: false}}
+      />
       <ContenidosNavigator.Screen
         name="Contenido"
         component={Contenido}

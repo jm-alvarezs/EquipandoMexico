@@ -7,7 +7,7 @@ import {ContenidosContext} from '../context/ContenidosContext';
 import {colors, style, text} from '../styles';
 import Screen from './Screen';
 
-const Contenido = () => {
+const Contenidos = () => {
   const {contenidos, getContenidos} = useContext(ContenidosContext);
 
   const navigation = useNavigation();
@@ -52,4 +52,4 @@ const Contenido = () => {
   );
 };
 
-export default Contenido;
+export default Contenidos;

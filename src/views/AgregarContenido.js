@@ -15,7 +15,7 @@ const AgregarContenido = () => {
 
   const handleFile = async () => {
     const result = await DocumentPicker.pick({
-      type: [DocumentPicker.types.images],
+      type: [DocumentPicker.types.images, DocumentPicker.types.video],
     });
     setFile(result);
   };

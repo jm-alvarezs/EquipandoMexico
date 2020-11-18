@@ -11,7 +11,8 @@ const ContenidoCard = ({contenido}) => {
   const src = `${BASE_URL}/adjuntos/${idAdjunto}`;
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Contenido', {idContenido})}>
+      onPress={() => navigation.navigate('Contenido', {idContenido})}
+      style={{marginBottom: 24}}>
       <Card
         containerStyle={{
           margin: -8,

@@ -5,7 +5,11 @@ export default (state, {type, payload}) => {
     case CONTENIDOS_RECIBIDOS:
       return {...state, contenidos: payload};
     case SET_CONTENIDO:
-      return {...state, contenido: payload};
+      const contenidos = [...state.contenidos];
+      const contenido = contenidos.find(
+        (content) => content.idContenido === payload,
+      );
+      return {...state, contenido};
     default:
       return state;
   }
