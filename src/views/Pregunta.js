@@ -86,6 +86,33 @@ const Pregunta = () => {
     return <ActivityIndicator color={colors.dark} />;
   };
 
+  const renderBoton = () => {
+    if (preguntas && preguntas !== null) {
+      if (preguntas.length === route.params.idPregunta) {
+        return (
+          <Button
+            title="Terminar"
+            onPress={() => postPreguntas(preguntas)}
+            containerStyle={[style.mainButton]}
+            buttonStyle={[style.mainButtonInner]}
+          />
+        );
+      }
+    }
+    return (
+      <Button
+        title="Siguiente"
+        containerStyle={[style.mainButton]}
+        buttonStyle={[style.mainButtonInner]}
+        onPress={() =>
+          navigation.navigate('Pregunta', {
+            idPregunta: route.params.idPregunta + 1,
+          })
+        }
+      />
+    );
+  };
+
   return (
     <Screen title="Pregunta">
       <View style={[layout.padding, {paddingTop: 0, height: '100%'}]}>
@@ -106,29 +133,7 @@ const Pregunta = () => {
               />
             )}
           </View>
-          <View style={[layout.half]}>
-            {route.params.idPregunta === preguntas.length ? (
-              <View>
-                <Button
-                  title="Terminar"
-                  onPress={() => postPreguntas(preguntas)}
-                  containerStyle={[style.mainButton]}
-                  buttonStyle={[style.mainButtonInner]}
-                />
-              </View>
-            ) : (
-              <Button
-                title="Siguiente"
-                containerStyle={[style.mainButton]}
-                buttonStyle={[style.mainButtonInner]}
-                onPress={() =>
-                  navigation.navigate('Pregunta', {
-                    idPregunta: route.params.idPregunta + 1,
-                  })
-                }
-              />
-            )}
-          </View>
+          <View style={[layout.half]}>{renderBoton()}</View>
         </View>
       </View>
     </Screen>

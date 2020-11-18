@@ -34,8 +34,7 @@ export default (state, {type, payload}) => {
       return {...state, preguntas};
     }
     case SET_PROPIEDAD_USER: {
-      const {key, value} = action.payload;
-      return {...state, [key]: value};
+      return {...state, diagnostico: payload};
     }
     default:
       return state;

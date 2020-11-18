@@ -11,6 +11,7 @@ import {
 const initialState = {
   preguntas: null,
   pregunta: null,
+  diagnostico: null,
 };
 
 const preguntas = [
