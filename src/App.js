@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import {CitasProvider} from './context/CitasContext';
 import {ContenidosProvider} from './context/ContenidosContext';
 import {ExpertosProvider} from './context/ExpertosContext';
 import {PreguntasProvider} from './context/PreguntasContext';
@@ -19,9 +20,11 @@ const App = () => {
       <ContenidosProvider>
         <ExpertosProvider>
           <PreguntasProvider>
-            <UserProvider>
-              <Home />
-            </UserProvider>
+            <CitasProvider>
+              <UserProvider>
+                <Home />
+              </UserProvider>
+            </CitasProvider>
           </PreguntasProvider>
         </ExpertosProvider>
       </ContenidosProvider>

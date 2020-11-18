@@ -31,12 +31,13 @@ export const PreguntasProvider = ({children}) => {
   function getPreguntas() {
     PreguntasService.getPreguntas().then((res) => {
       //const { preguntas } = res.data;
+      console.log(preguntas);
       dispatch({type: PREGUNTAS_RECIBIDAS, payload: preguntas});
     });
   }
 
-  function getPregunta(numero) {
-    dispatch({type: SET_PREGUNTA, payload: numero});
+  function getPregunta(idPregunta) {
+    dispatch({type: SET_PREGUNTA, payload: idPregunta});
   }
 
   function postPreguntas(preguntas) {

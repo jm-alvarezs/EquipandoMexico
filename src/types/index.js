@@ -33,6 +33,7 @@ export const SHOW_SPINNER = 'SHOW_SPINNER';
  */
 export const PREGUNTAS_RECIBIDAS = 'PREGUNTAS_RECIBIDAS';
 export const SET_PREGUNTA = 'SET_PREGUNTA';
+export const SET_RESPUESTA_PREGUNTA = 'SET_RESPUESTA_PREGUNTA';
 /**
  * Contenidos
  */

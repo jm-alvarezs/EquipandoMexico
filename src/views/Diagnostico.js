@@ -26,10 +26,10 @@ const Diagnostico = () => {
               su desarrollo se incorpore de manera adecuada.
             </Text>
             <Button
-              title="Comenzar"
+              title="Ver Contenido"
               containerStyle={[styles.secondaryButton, style.shadow]}
               buttonStyle={[styles.mainButtonInner]}
-              onPress={() => navigation.navigate('Pregunta', {idPregunta: 1})}
+              onPress={() => navigation.navigate('Contenido')}
             />
           </View>
         );
@@ -42,10 +42,10 @@ const Diagnostico = () => {
           Recibe un diagnóstico para que mejores el desarrollo de tu hijo(a)
         </Text>
         <Button
-          title="Agendar"
+          title="Comenzar"
           containerStyle={[style.mainButton, style.shadow]}
           buttonStyle={[style.mainButtonInner]}
-          onPress={() => postCita(cita)}
+          onPress={() => navigation.navigate('Pregunta', {idPregunta: 1})}
         />
       </View>
     );

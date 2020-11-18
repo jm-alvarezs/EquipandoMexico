@@ -5,6 +5,7 @@ export const colors = {
   dark: '#2b2b2b',
   blue: 'rgba(39,107,165,1)',
   danger: '#dc3545',
+  yellow: '##F2BF5E',
 };
 
 export const elements = StyleSheet.create({
@@ -72,6 +73,10 @@ export const style = StyleSheet.create({
   },
   mainButtonInner: {
     backgroundColor: 'transparent',
+  },
+  buttonPreguntaSelected: {
+    backgroundColor: '#F2BF5E',
+    borderRadius: 100,
   },
 });
 

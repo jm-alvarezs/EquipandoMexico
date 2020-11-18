@@ -28,50 +28,56 @@ const size = 25;
 
 const StackAgenda = () => {
   const AgendaNavigator = createStackNavigator();
-  <AgendaNavigator.Navigator>
-    <AgendaNavigator.Screen
-      name="Citas"
-      component={Citas}
-      options={{headerShown: false}}
-    />
-    <AgendaNavigator.Screen
-      name="Cancelar"
-      component={Cancelar}
-      options={{headerShown: false}}
-    />
-  </AgendaNavigator.Navigator>;
+  return (
+    <AgendaNavigator.Navigator>
+      <AgendaNavigator.Screen
+        name="Citas"
+        component={Citas}
+        options={{headerShown: false}}
+      />
+      <AgendaNavigator.Screen
+        name="Cancelar"
+        component={Cancelar}
+        options={{headerShown: false}}
+      />
+    </AgendaNavigator.Navigator>
+  );
 };
 
 const StackDiagnostico = () => {
   const DiagnosticoNavigator = createStackNavigator();
-  <DiagnosticoNavigator.Navigator>
-    <DiagnosticoNavigator.Screen
-      name="Diagnostico"
-      component={Diagnostico}
-      options={{headerShown: false}}
-    />
-    <DiagnosticoNavigator.Screen
-      name="Pregunta"
-      component={Pregunta}
-      options={{headerShown: false}}
-    />
-  </DiagnosticoNavigator.Navigator>;
+  return (
+    <DiagnosticoNavigator.Navigator>
+      <DiagnosticoNavigator.Screen
+        name="Diagnostico"
+        component={Diagnostico}
+        options={{headerShown: false}}
+      />
+      <DiagnosticoNavigator.Screen
+        name="Pregunta"
+        component={Pregunta}
+        options={{headerShown: false}}
+      />
+    </DiagnosticoNavigator.Navigator>
+  );
 };
 
 const StackContenidos = () => {
   const ContenidosNavigator = createStackNavigator();
-  <ContenidosNavigator.Navigator>
-    <ContenidosNavigator.Screen
-      name="Contenido"
-      component={Contenido}
-      options={{headerShown: false}}
-    />
-    <ContenidosNavigator.Screen
-      name="AgregarContenido"
-      component={AgregarContenido}
-      options={{headerShown: false}}
-    />
-  </ContenidosNavigator.Navigator>;
+  return (
+    <ContenidosNavigator.Navigator>
+      <ContenidosNavigator.Screen
+        name="Contenido"
+        component={Contenido}
+        options={{headerShown: false}}
+      />
+      <ContenidosNavigator.Screen
+        name="AgregarContenido"
+        component={AgregarContenido}
+        options={{headerShown: false}}
+      />
+    </ContenidosNavigator.Navigator>
+  );
 };
 
 const StackExpertos = () => {
@@ -88,12 +94,12 @@ const StackExpertos = () => {
         component={AgregarExperto}
         options={{headerShown: false}}
       />
-      <AgendaNavigator.Screen
+      <ExpertosNavigator.Screen
         name="Agenda"
         component={Agenda}
         options={{headerShown: false}}
       />
-      <AgendaNavigator.Screen
+      <ExpertosNavigator.Screen
         name="Gracias"
         component={Gracias}
         options={{headerShown: false}}

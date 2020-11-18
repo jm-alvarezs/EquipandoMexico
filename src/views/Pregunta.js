@@ -1,21 +1,36 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, ActivityIndicator, Button} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
+import {Button} from 'react-native-elements';
 import {PreguntasContext} from '../context/PreguntasContext';
-import {colors, layout, text} from '../styles';
+import {colors, layout, style, text} from '../styles';
 import Screen from './Screen';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const Pregunta = () => {
-  const {pregunta, getPregunta, setRespuestaPregunta} = useContext(
-    PreguntasContext,
-  );
+  const {
+    pregunta,
+    preguntas,
+    getPreguntas,
+    getPregunta,
+    postPreguntas,
+    setRespuestaPregunta,
+  } = useContext(PreguntasContext);
 
   const route = useRoute();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const {idPregunta} = route.params;
-    getPregunta(idPregunta);
+    if (!preguntas || preguntas === null) {
+      getPreguntas();
+    }
   }, []);
+
+  useEffect(() => {
+    if (preguntas !== null && pregunta === null) {
+      const {idPregunta} = route.params;
+      getPregunta(idPregunta);
+    }
+  }, [preguntas]);
 
   const renderPregunta = () => {
     if (pregunta && pregunta !== null) {
@@ -31,6 +46,13 @@ const Pregunta = () => {
                 onPress={() =>
                   setRespuestaPregunta(route.params.idPregunta, 'Si')
                 }
+                containerStyle={
+                  pregunta.respuesta === 'Si'
+                    ? [style.buttonPreguntaSelected]
+                    : [style.mainButtonInner]
+                }
+                buttonStyle={[style.mainButtonInner]}
+                titleStyle={{color: colors.dark}}
               />
             </View>
             <View style={[layout.half]}>
@@ -39,6 +61,13 @@ const Pregunta = () => {
                 onPress={() =>
                   setRespuestaPregunta(route.params.idPregunta, 'No')
                 }
+                containerStyle={
+                  pregunta.respuesta === 'No'
+                    ? [style.buttonPreguntaSelected]
+                    : [style.mainButtonInner]
+                }
+                buttonStyle={[style.mainButtonInner]}
+                titleStyle={{color: colors.dark}}
               />
             </View>
           </View>
@@ -50,7 +79,49 @@ const Pregunta = () => {
 
   return (
     <Screen title="Pregunta">
-      <View style={[layout.padding]}>{renderPregunta()}</View>
+      <View style={[layout.padding, {paddingTop: 0, height: '100%'}]}>
+        {renderPregunta()}
+        <View style={[layout.row, {position: 'absolute', bottom: 150}]}>
+          <View style={[layout.half]}>
+            {route.params.idPregunta > 1 && (
+              <Button
+                title="Anterior"
+                containerStyle={[style.mainButtonInner]}
+                buttonStyle={[style.mainButtonInner]}
+                titleStyle={{color: colors.dark}}
+                onPress={() =>
+                  navigation.navigate('Pregunta', {
+                    idPregunta: route.params.idPregunta - 1,
+                  })
+                }
+              />
+            )}
+          </View>
+          <View style={[layout.half]}>
+            {route.params.idPregunta === preguntas.length ? (
+              <View>
+                <Button
+                  title="Terminar"
+                  onPress={() => postPreguntas(preguntas)}
+                  containerStyle={[style.mainButton]}
+                  buttonStyle={[style.mainButtonInner]}
+                />
+              </View>
+            ) : (
+              <Button
+                title="Siguiente"
+                containerStyle={[style.mainButton]}
+                buttonStyle={[style.mainButtonInner]}
+                onPress={() =>
+                  navigation.navigate('Pregunta', {
+                    idPregunta: route.params.idPregunta + 1,
+                  })
+                }
+              />
+            )}
+          </View>
+        </View>
+      </View>
     </Screen>
   );
 };
