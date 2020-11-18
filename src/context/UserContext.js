@@ -40,7 +40,6 @@ export const UserProvider = ({children}) => {
         UsuarioService.getUsuario()
           .then((res) => {
             let {usuario} = res.data;
-            console.log(usuario);
             dispatch({
               type: LOGIN,
               payload: usuario,
@@ -163,7 +162,6 @@ export const UserProvider = ({children}) => {
   }
 
   function setPropiedadUser(key, value) {
-    console.log(key, value);
     if (key === 'idAdjunto') {
       dispatch({type: SET_PROPIEDAD_USER, payload: {key: 'file', value}});
       if (!value) dispatch({type: SET_PROPIEDAD_USER, payload: {key, value}});
