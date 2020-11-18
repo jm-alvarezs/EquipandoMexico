@@ -14,6 +14,8 @@ target 'EquipandoMexico' do
 
   pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
 
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+
   target 'EquipandoMexicoTests' do
     inherit! :complete
     # Pods for testing

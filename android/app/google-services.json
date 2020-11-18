@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "865479926197",
+    "firebase_url": "https://moviles-dev.firebaseio.com",
+    "project_id": "moviles-dev",
+    "storage_bucket": "moviles-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865479926197:android:2ff2bd311ef0c1998279fc",
+        "android_client_info": {
+          "package_name": "com.equipandomexico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865479926197-71tmehckfdqj7hkskd4l2k0vl55334ad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb-x5LXnlk93bePqbhuCEVW3jCqoFpNrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865479926197-71tmehckfdqj7hkskd4l2k0vl55334ad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "865479926197-eks31c35gmnbirv5r1a4ucj6mbn53ujp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.equipando.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

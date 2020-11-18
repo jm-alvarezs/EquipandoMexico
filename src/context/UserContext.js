@@ -56,9 +56,11 @@ export const UserProvider = ({children}) => {
   }
 
   function userLoggedIn() {
+    console.log('a');
     dispatch({type: SHOW_SPINNER});
     AuthService.userLoggedIn(
       () => {
+        console.log(user);
         UsuarioService.getUsuario()
           .then((res) => {
             let {usuario} = res.data;
@@ -240,6 +242,13 @@ export const UserProvider = ({children}) => {
     });
   }
 
+  function getUsuario() {
+    UsuarioService.getUsuario().then((res) => {
+      const {usuario} = res.data;
+      dispatch({type: LOGIN, payload: usuario});
+    });
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -247,6 +256,7 @@ export const UserProvider = ({children}) => {
         signIn,
         signUp,
         signOut,
+        getUsuario,
         cancelEdit,
         signInPhone,
         userLoggedIn,

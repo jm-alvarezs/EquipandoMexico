@@ -17,7 +17,7 @@ const SignUp = () => {
   const {signUp, created} = useContext(UserContext);
 
   const handleSubmit = () => {
-    signUp(nombre, telefono);
+    signUp(nombre, correo, password, telefono);
   };
 
   useEffect(() => {

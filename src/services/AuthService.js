@@ -1,6 +1,6 @@
 import api from './api';
-import firebase from 'firebase';
-import 'firebase/auth';
+import firebase from '@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
 
 let firebaseConfig = {
   apiKey: 'AIzaSyA7r9nR8yT4AVyf-w227yFicMZF_LTuN6g',
@@ -12,12 +12,16 @@ let firebaseConfig = {
   appId: '1:865479926197:web:679627c707e50a4b8279fc',
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-const getToken = () => auth.currentUser.getIdToken(true);
-
-const auth = firebase.auth();
+const getToken = () => {
+  const {currentUser} = auth();
+  if (currentUser && currentUser !== null) {
+    return currentUser.getIdToken(true);
+  }
+};
 
 export default {
   signIn: (email, password) =>
@@ -30,9 +34,10 @@ export default {
           return user;
         });
       }),
-  signInPhone: (phoneNumber) => auth.signInWithPhoneNumber(phoneNumber),
+  signInPhone: (phoneNumber) =>
+    auth().signInWithPhoneNumber(`+52${phoneNumber}`),
   userLoggedIn: (success, error) =>
-    auth.onAuthStateChanged((user) => {
+    auth().onAuthStateChanged((user) => {
       if (user) {
         getToken().then((token) => {
           api.defaults.headers.common['Authorization'] = token;
@@ -42,10 +47,10 @@ export default {
         error();
       }
     }),
-  signOut: () => auth.signOut(),
+  signOut: () => auth().signOut(),
   signUp: (correo, password) =>
-    auth.createUserWithEmailAndPassword(correo, password),
-  recoverPassword: (email) => auth.sendPasswordResetEmail(email),
-  getToken: () => auth.currentUser.getIdToken(true),
-  updateEmail: (email) => auth.currentUser.updateEmail(email),
+    auth().createUserWithEmailAndPassword(correo, password),
+  recoverPassword: (email) => auth().sendPasswordResetEmail(email),
+  getToken: () => auth().currentUser.getIdToken(true),
+  updateEmail: (email) => auth().currentUser.updateEmail(email),
 };

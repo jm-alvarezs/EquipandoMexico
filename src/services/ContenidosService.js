@@ -7,4 +7,5 @@ export default {
     api.get(`${route}?limit=${limit}&offset=${offset}`),
   getContenido: (idContenido) => api.get(`${route}/${idContenido}`),
   postContenido: (contenido) => api.post(route, {...contenido}),
+  deleteContenido: (idContenido) => api.delete(`${route}/${idContenido}`),
 };

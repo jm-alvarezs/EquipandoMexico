@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -19,10 +19,10 @@ const AuthTab = createBottomTabNavigator();
 
 const size = 25;
 
-export default function App() {
-  const {user, userLoggedIn} = React.useContext(UserContext);
+const App = () => {
+  const {user, userLoggedIn} = useContext(UserContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     userLoggedIn();
   }, []);
 
@@ -113,4 +113,6 @@ export default function App() {
       </AuthTab.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;

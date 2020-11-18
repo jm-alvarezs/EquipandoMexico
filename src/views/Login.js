@@ -9,7 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 const SignUp = () => {
   const [telefono, setTelefono] = useState('');
 
-  const {signInPhone} = useContext(UserContext);
+  const {signInPhone, confirmation} = useContext(UserContext);
 
   const navigation = useNavigation();
 
