@@ -36,7 +36,9 @@ const Pregunta = () => {
     if (pregunta && pregunta !== null) {
       return (
         <>
-          <Text style={[text.h2, layout.my]}>Pregunta {pregunta.orden}</Text>
+          <Text style={[text.h2, layout.my, style.bold]}>
+            Pregunta {pregunta.orden}
+          </Text>
           <Text style={[text.h4, layout.my]}>{pregunta.texto}</Text>
           <Text style={[text.h4, layout.my]}>{pregunta.descripcion}</Text>
           <View style={[layout.row]}>

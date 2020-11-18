@@ -40,6 +40,8 @@ const Expertos = () => {
           {renderExpertos()}
           <Button
             title="Agregar Experto"
+            containerStyle={[style.mainButton, style.mt]}
+            buttonStyle={[style.mainButtonInner]}
             onPress={() => navigation.navigate('AgregarExperto')}
           />
         </ScrollView>
