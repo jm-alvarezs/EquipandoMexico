@@ -10,6 +10,7 @@ const Pregunta = () => {
   const {
     pregunta,
     preguntas,
+    diagnostico,
     getPreguntas,
     getPregunta,
     postPreguntas,
@@ -31,6 +32,12 @@ const Pregunta = () => {
       getPregunta(idPregunta);
     }
   }, [preguntas]);
+
+  useEffect(() => {
+    if (diagnostico && diagnostico !== null) {
+      navigation.navigate('Diagnostico');
+    }
+  }, [diagnostico]);
 
   const renderPregunta = () => {
     if (pregunta && pregunta !== null) {

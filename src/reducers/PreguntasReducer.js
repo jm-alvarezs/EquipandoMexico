@@ -1,6 +1,7 @@
 import {
   PREGUNTAS_RECIBIDAS,
   SET_PREGUNTA,
+  SET_PROPIEDAD_USER,
   SET_RESPUESTA_PREGUNTA,
 } from '../types';
 
@@ -31,6 +32,10 @@ export default (state, {type, payload}) => {
         preguntas[index].respuesta = payload.respuesta;
       }
       return {...state, preguntas};
+    }
+    case SET_PROPIEDAD_USER: {
+      const {key, value} = action.payload;
+      return {...state, [key]: value};
     }
     default:
       return state;
