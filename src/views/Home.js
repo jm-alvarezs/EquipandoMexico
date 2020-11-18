@@ -14,12 +14,65 @@ import SignUp from './SignUp';
 import Login from './Login';
 import Code from './Code';
 import AgregarExperto from './AgregarExperto';
+import AgregarContenido from './AgregarContenido';
+import Pregunta from './Pregunta';
+import Cancelar from './Cancelar';
+import Gracias from './Gracias';
+import Citas from './Citas';
 
 const Tab = createBottomTabNavigator();
 
 const AuthTab = createBottomTabNavigator();
 
 const size = 25;
+
+const StackAgenda = () => {
+  const AgendaNavigator = createStackNavigator();
+  <AgendaNavigator.Navigator>
+    <AgendaNavigator.Screen
+      name="Citas"
+      component={Citas}
+      options={{headerShown: false}}
+    />
+    <AgendaNavigator.Screen
+      name="Cancelar"
+      component={Cancelar}
+      options={{headerShown: false}}
+    />
+  </AgendaNavigator.Navigator>;
+};
+
+const StackDiagnostico = () => {
+  const DiagnosticoNavigator = createStackNavigator();
+  <DiagnosticoNavigator.Navigator>
+    <DiagnosticoNavigator.Screen
+      name="Diagnostico"
+      component={Diagnostico}
+      options={{headerShown: false}}
+    />
+    <DiagnosticoNavigator.Screen
+      name="Pregunta"
+      component={Pregunta}
+      options={{headerShown: false}}
+    />
+  </DiagnosticoNavigator.Navigator>;
+};
+
+const StackContenidos = () => {
+  const ContenidosNavigator = createStackNavigator();
+  <ContenidosNavigator.Navigator>
+    <ContenidosNavigator.Screen
+      name="Contenido"
+      component={Contenido}
+      options={{headerShown: false}}
+    />
+    <ContenidosNavigator.Screen
+      name="AgregarContenido"
+      component={AgregarContenido}
+      options={{headerShown: false}}
+    />
+  </ContenidosNavigator.Navigator>;
+};
 
 const StackExpertos = () => {
   const ExpertosNavigator = createStackNavigator();
@@ -33,6 +86,16 @@ const StackExpertos = () => {
       <ExpertosNavigator.Screen
         name="AgregarExperto"
         component={AgregarExperto}
+        options={{headerShown: false}}
+      />
+      <AgendaNavigator.Screen
+        name="Agenda"
+        component={Agenda}
+        options={{headerShown: false}}
+      />
+      <AgendaNavigator.Screen
+        name="Gracias"
+        component={Gracias}
         options={{headerShown: false}}
       />
     </ExpertosNavigator.Navigator>
@@ -61,8 +124,8 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="Agenda"
-          component={Agenda}
+          name="Citas"
+          component={StackAgenda}
           options={{
             tabBarLabel: '',
             tabBarIcon: () => (
@@ -71,8 +134,8 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="Contenido"
-          component={Contenido}
+          name="Contenidos"
+          component={StackContenidos}
           options={{
             tabBarLabel: '',
             tabBarIcon: () => (
@@ -82,7 +145,7 @@ const App = () => {
         />
         <Tab.Screen
           name="Diagnóstico"
-          component={Diagnostico}
+          component={StackDiagnostico}
           options={{
             tabBarLabel: '',
             tabBarIcon: () => (

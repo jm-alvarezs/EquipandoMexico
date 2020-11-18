@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {TextInput} from 'react-native';
 import {Button} from 'react-native-elements';
 import {ContenidosContext} from '../context/ContenidosContext';
