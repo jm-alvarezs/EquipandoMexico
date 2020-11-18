@@ -18,7 +18,7 @@ const AgregarExperto = () => {
     const result = await DocumentPicker.pick({
       type: [DocumentPicker.types.images],
     });
-    setFile(file);
+    setFile(result);
   };
 
   return (
