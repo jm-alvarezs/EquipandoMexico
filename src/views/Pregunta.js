@@ -10,7 +10,6 @@ const Pregunta = () => {
   const {
     pregunta,
     preguntas,
-    diagnostico,
     getPreguntas,
     getPregunta,
     postPreguntas,

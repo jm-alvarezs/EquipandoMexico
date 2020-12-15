@@ -68,13 +68,6 @@ export const PreguntasProvider = ({children}) => {
     dispatch({type: SET_RESPUESTA_PREGUNTA, payload: {idPregunta, respuesta}});
   };
 
-  const getTiposPregunta = () => {
-    PreguntasService.getTiposPregunta().then(() => {
-      const {tiposPregunta} = res.data;
-      dispatch({type: SET_TIPOS_PREGUNTA, payload: tiposPregunta});
-    });
-  };
-
   const pushPregunta = () => {
     dispatch({type: PUSH_PREGUNTA, payload: pregunta});
   };

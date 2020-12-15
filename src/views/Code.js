@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {Card, Button} from 'react-native-elements';
 import {UserContext} from '../context/UserContext';
-import {style, text, colors, layout} from '../styles';
+import {style, text, colors, layout, elements} from '../styles';
 import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
 
@@ -34,7 +34,12 @@ const Code = () => {
       </View>
       <Card style={[style.shadow]}>
         <Text>Ingresar el Código</Text>
-        <TextInput onChangeText={(code) => setCode(code)} value={code} />
+        <TextInput
+          onChangeText={(code) => setCode(code)}
+          value={code}
+          style={[elements.input]}
+          autoCapitalize="none"
+        />
         <Button
           title="Entrar"
           containerStyle={[style.mainButton]}

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {Card, Button} from 'react-native-elements';
 import {UserContext} from '../context/UserContext';
-import {style, text, colors, layout} from '../styles';
+import {style, text, colors, layout, elements} from '../styles';
 import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
 
@@ -33,6 +33,9 @@ const SignUp = () => {
         <TextInput
           onChangeText={(telefono) => setTelefono(telefono)}
           value={telefono}
+          style={[elements.input]}
+          textContentType="telephoneNumber"
+          autoCapitalize="none"
         />
         <Button
           title="Entrar"
