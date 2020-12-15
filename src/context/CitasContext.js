@@ -2,6 +2,7 @@ import React, {createContext, useReducer} from 'react';
 import CitasReducer from '../reducers/CitasReducer';
 import CitasService from '../services/CitasService';
 import {CITAS_RECIBIDAS, SET_CITA, SET_PROPIEDAD_CITA} from '../types';
+import moment from 'moment';
 
 const initialState = {
   citas: null,

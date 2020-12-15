@@ -100,6 +100,15 @@ export const layout = StyleSheet.create({
   third: {
     width: '30%',
   },
+  twothird: {
+    width: '70%',
+  },
+  four: {
+    width: '40%',
+  },
+  eight: {
+    width: '60%',
+  },
   center: {
     alignItems: 'center',
     justifyContent: 'center',
