@@ -21,6 +21,7 @@ const Cuestionario = () => {
     if (tipos && tipos !== null) {
       return tipos.map((tipoPregunta) => (
         <TouchableOpacity
+          key={tipoPregunta.idTipoPregunta}
           onPress={() => {
             navigation.navigate('Pregunta', {
               idTipoPregunta: tipoPregunta.idTipoPregunta,
