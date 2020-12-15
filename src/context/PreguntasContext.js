@@ -9,7 +9,9 @@ import {
   SET_RESPUESTA_PREGUNTA,
   PUSH_PREGUNTA,
   TIPOS_PREGUNTA_RECIBIDOS,
-  PREGUNTA_RECIBIDA,
+  OPCIONES_RECIBIDAS,
+  SET_PREGUNTA_COGNICION,
+  SET_PROPIEDAD_COGNICION,
 } from '../types';
 
 const initialState = {
@@ -36,9 +38,10 @@ export const PreguntasProvider = ({children}) => {
 
   function getPreguntas(idTipoPregunta) {
     PreguntasService.getPreguntas(idTipoPregunta).then((res) => {
-      const {preguntas, si, no} = res.data;
+      const {principales, si, no} = res.data;
       const preguntasSi = si;
       const preguntasNo = no;
+      const preguntas = principales;
       dispatch({
         type: PREGUNTAS_RECIBIDAS,
         payload: {preguntas, preguntasSi, preguntasNo},
@@ -52,8 +55,9 @@ export const PreguntasProvider = ({children}) => {
 
   function getCognicion(idPregunta) {
     PreguntasService.getCognicion(idPregunta).then((res) => {
-      const {pregunta} = res.data;
-      dispatch({type: PREGUNTA_RECIBIDA, payload: pregunta});
+      const {preguntasCognicion} = res.data;
+      console.log(preguntasCognicion);
+      dispatch({type: OPCIONES_RECIBIDAS, payload: preguntasCognicion});
     });
   }
 
@@ -68,12 +72,22 @@ export const PreguntasProvider = ({children}) => {
     dispatch({type: SET_RESPUESTA_PREGUNTA, payload: {idPregunta, respuesta}});
   };
 
-  const pushPregunta = () => {
+  const pushPregunta = (pregunta) => {
     dispatch({type: PUSH_PREGUNTA, payload: pregunta});
   };
 
   const popPegunta = () => {
     dispatch({type: POP_PREGUNTA});
+  };
+
+  const setPreguntaCognicion = (index) => {
+    dispatch({type: SET_PREGUNTA_COGNICION, payload: index});
+  };
+  const setPropiedadCognicion = (idPreguntaCognicion, value) => {
+    dispatch({
+      type: SET_PROPIEDAD_COGNICION,
+      payload: {idPreguntaCognicion, value},
+    });
   };
 
   return (
@@ -88,6 +102,8 @@ export const PreguntasProvider = ({children}) => {
         postPreguntas,
         getTiposPregunta,
         setRespuestaPregunta,
+        setPreguntaCognicion,
+        setPropiedadCognicion,
       }}>
       {children}
     </PreguntasContext.Provider>

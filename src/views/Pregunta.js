@@ -11,7 +11,6 @@ const Pregunta = () => {
     pregunta,
     preguntas,
     getPreguntas,
-    getPregunta,
     postPreguntas,
     popPregunta,
     pushPregunta,
@@ -28,17 +27,10 @@ const Pregunta = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (preguntas !== null && pregunta === null) {
-      const {idPregunta} = route.params;
-      getPregunta(idPregunta);
-    }
-  }, [preguntas]);
-
   const renderPregunta = () => {
     if (pregunta && pregunta !== null) {
       return (
-        <>
+        <View>
           <Text style={[text.h2, layout.my, style.bold]}>
             Pregunta {pregunta.orden}
           </Text>
@@ -48,9 +40,7 @@ const Pregunta = () => {
             <View style={[layout.half]}>
               <Button
                 title="Sí"
-                onPress={() =>
-                  setRespuestaPregunta(route.params.idPregunta, 'Si')
-                }
+                onPress={() => setRespuestaPregunta(pregunta.idPregunta, 'Si')}
                 containerStyle={
                   pregunta.respuesta === 'Si'
                     ? [style.buttonPreguntaSelected]
@@ -63,9 +53,7 @@ const Pregunta = () => {
             <View style={[layout.half]}>
               <Button
                 title="No"
-                onPress={() =>
-                  setRespuestaPregunta(route.params.idPregunta, 'No')
-                }
+                onPress={() => setRespuestaPregunta(pregunta.idPregunta, 'No')}
                 containerStyle={
                   pregunta.respuesta === 'No'
                     ? [style.buttonPreguntaSelected]
@@ -76,7 +64,7 @@ const Pregunta = () => {
               />
             </View>
           </View>
-        </>
+        </View>
       );
     }
     return <ActivityIndicator color={colors.dark} />;
@@ -102,16 +90,16 @@ const Pregunta = () => {
         buttonStyle={[style.mainButtonInner]}
         onPress={() => {
           pushPregunta(pregunta);
+          const index = preguntas.findIndex(
+            (question) => question.idPregunta === pregunta.idPregunta,
+          );
           if (pregunta.respuesta === 'Si') {
-            const index = preguntas.findIndex(
-              (question) => question.idPregunta === pregunta.idPregunta,
-            );
             navigation.navigate('PreguntaSi', {
               index,
             });
           } else {
             navigation.navigate('PreguntaCheckboxes', {
-              idPregunta: route.params.idPregunta + 1,
+              index,
             });
           }
         }}
@@ -121,9 +109,9 @@ const Pregunta = () => {
 
   return (
     <Screen title="Pregunta">
-      <View style={[layout.padding, {paddingTop: 0, height: '100%'}]}>
-        {renderPregunta()}
-        <View style={[layout.row, {position: 'absolute', bottom: 150}]}>
+      <View style={[layout.padding, {paddingTop: 0, height: 500}]}>
+        <View style={[layout.row]}>{renderPregunta()}</View>
+        <View style={[layout.row, {position: 'absolute', bottom: 0}]}>
           <View style={[layout.half]}>
             {route.params.idPregunta > 1 && (
               <Button

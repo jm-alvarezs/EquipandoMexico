@@ -5,12 +5,17 @@ import {
   SET_PROPIEDAD_USER,
   SET_RESPUESTA_PREGUNTA,
   TIPOS_PREGUNTA_RECIBIDOS,
+  PUSH_PREGUNTA,
+  POP_PREGUNTA,
+  OPCIONES_RECIBIDAS,
+  SET_PREGUNTA_COGNICION,
+  SET_PROPIEDAD_COGNICION,
 } from '../types';
 
 export default (state, {type, payload}) => {
   switch (type) {
     case PREGUNTAS_RECIBIDAS:
-      return {...state, ...payload};
+      return {...state, ...payload, pregunta: payload.preguntas[0]};
     case SET_PREGUNTA:
       let preguntas = state.preguntas;
       if (preguntas && preguntas !== null) {
@@ -42,7 +47,8 @@ export default (state, {type, payload}) => {
       return {...state, diagnostico: payload};
     }
     case PUSH_PREGUNTA: {
-      const preguntasStack = [...state.preguntasStack];
+      let preguntasStack = state.preguntasStack;
+      if (preguntasStack === null) preguntasStack = [];
       preguntasStack.push(payload);
       return {...state, preguntasStack};
     }
@@ -54,6 +60,24 @@ export default (state, {type, payload}) => {
     }
     case TIPOS_PREGUNTA_RECIBIDOS:
       return {...state, tipos: payload};
+    case OPCIONES_RECIBIDAS:
+      return {...state, opciones: payload};
+    case SET_PREGUNTA_COGNICION: {
+      const preguntas = state.preguntasNo;
+      if (preguntas === null || !preguntas) preguntas = [];
+      let pregunta = preguntas[0];
+      return {...state, pregunta: {...pregunta}};
+    }
+    case SET_PROPIEDAD_COGNICION: {
+      const opciones = [...state.opciones];
+      const index = opciones.findIndex(
+        (opcion) => opcion.idPreguntaCognicion === payload.idPreguntaCognicion,
+      );
+      if (index !== -1) {
+        opciones[index].checked = payload.value;
+      }
+      return {...state, opciones};
+    }
     default:
       return state;
   }

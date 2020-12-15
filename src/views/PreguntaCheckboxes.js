@@ -5,21 +5,26 @@ import {PreguntasContext} from '../context/PreguntasContext';
 import {colors, layout, style, text} from '../styles';
 import Screen from './Screen';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import CheckBox from '@react-native-community/checkbox';
 
 const PreguntaCheckboxes = () => {
   const {
     pregunta,
     preguntas,
-    getPreguntaCognicion,
-    setRespuestaPregunta,
+    preguntasNo,
+    opciones,
+    getCognicion,
+    setPreguntaCognicion,
+    setPropiedadCognicion,
   } = useContext(PreguntasContext);
 
   const route = useRoute();
   const navigation = useNavigation();
 
   useEffect(() => {
-    const idPregunta = route.params.idPregunta;
-    getPreguntaCognicion(idPregunta);
+    const {index} = route.params;
+    setPreguntaCognicion(index);
+    getCognicion(preguntasNo[index].idPregunta);
   }, []);
 
   const renderPregunta = () => {
@@ -30,39 +35,6 @@ const PreguntaCheckboxes = () => {
             Pregunta {pregunta.orden}
           </Text>
           <Text style={[text.h4, layout.my]}>{pregunta.texto}</Text>
-          <Text style={[text.h4, layout.my]}>{pregunta.descripcion}</Text>
-          <View style={[layout.row]}>
-            <View style={[layout.half]}>
-              <Button
-                title="Sí"
-                onPress={() =>
-                  setRespuestaPregunta(route.params.idPregunta, 'Si')
-                }
-                containerStyle={
-                  pregunta.respuesta === 'Si'
-                    ? [style.buttonPreguntaSelected]
-                    : [style.mainButtonInner]
-                }
-                buttonStyle={[style.mainButtonInner]}
-                titleStyle={{color: colors.dark}}
-              />
-            </View>
-            <View style={[layout.half]}>
-              <Button
-                title="No"
-                onPress={() =>
-                  setRespuestaPregunta(route.params.idPregunta, 'No')
-                }
-                containerStyle={
-                  pregunta.respuesta === 'No'
-                    ? [style.buttonPreguntaSelected]
-                    : [style.mainButtonInner]
-                }
-                buttonStyle={[style.mainButtonInner]}
-                titleStyle={{color: colors.dark}}
-              />
-            </View>
-          </View>
         </>
       );
     }
@@ -99,13 +71,31 @@ const PreguntaCheckboxes = () => {
     );
   };
 
+  const renderOpciones = () => {
+    if (opciones && opciones !== null) {
+      return opciones.map((opcion) => (
+        <View style={[layout.row]}>
+          <CheckBox
+            disabled={false}
+            value={opcion.checked}
+            onValueChange={(check) =>
+              setPropiedadCognicion(opcion.idPreguntaCognicion, check)
+            }
+          />
+          <Text style={[text.p]}>{opcion.nombre}</Text>
+        </View>
+      ));
+    }
+  };
+
   return (
     <Screen title="Pregunta">
-      <View style={[layout.padding, {paddingTop: 0, height: '100%'}]}>
+      <View style={[layout.padding, {paddingTop: 0, height: 500}]}>
         {renderPregunta()}
-        <View style={[layout.row, {position: 'absolute', bottom: 150}]}>
+        {renderOpciones()}
+        <View style={[layout.row]}>
           <View style={[layout.half]}>
-            {route.params.idPregunta > 1 && (
+            {route.params.index > 1 && (
               <Button
                 title="Anterior"
                 containerStyle={[style.mainButtonInner]}
@@ -113,7 +103,7 @@ const PreguntaCheckboxes = () => {
                 titleStyle={{color: colors.dark}}
                 onPress={() =>
                   navigation.navigate('Pregunta', {
-                    idPregunta: route.params.idPregunta - 1,
+                    idPregunta: route.params.index - 1,
                   })
                 }
               />

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {Card} from 'react-native-elements';
 import {CitasContext} from '../context/CitasContext';
@@ -40,6 +40,11 @@ const Agenda = () => {
 
   const renderEspacios = () => {
     if (espacios && espacios !== null) {
+      if (espacios.length === 0) {
+        return (
+          <Text style={[text.p, style.mt]}> No hay espacios disponibles</Text>
+        );
+      }
       return espacios.map((espacio) => (
         <Card onPress={() => postCita(espacio.idEspacio)}>
           <Text>De:</Text>

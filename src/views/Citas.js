@@ -17,9 +17,13 @@ const Citas = () => {
   }, []);
 
   const renderCitas = () => {
-    if (citas && cotas !== null) {
+    if (citas && citas !== null) {
       if (citas.length === 0) {
-        return <Text style={[text.p]}>Aún no tienes citas. ¡Agenda una!</Text>;
+        return (
+          <Text style={[text.p, {marginBottom: 12}]}>
+            Aún no tienes citas. ¡Agenda una!
+          </Text>
+        );
       }
       return citas.map((cita) => <CitaCard key={cita.idCita} cita={cita} />);
     }
