@@ -14,6 +14,7 @@ import {
   GUARDAR_USUARIO,
   EDITAR_USUARIO,
   CONFIRM_RECIBIDO,
+  HIJO_CREATED,
 } from '../types';
 import {displayError, displaySuccess} from '../utils';
 import moment from 'moment';
@@ -249,8 +250,9 @@ export const UserProvider = ({children}) => {
   }
 
   function postHijo(nombre, fecha, sexo) {
-    fecha = moment(fecha).format('YYYY-MM-DD');
-    UsuarioService.postHijo({nombre, fecha, sexo});
+    UsuarioService.postHijo({nombre, fecha, sexo}).then(() => {
+      dispatch({type: HIJO_CREATED});
+    });
   }
 
   function updateHijo(hijo) {

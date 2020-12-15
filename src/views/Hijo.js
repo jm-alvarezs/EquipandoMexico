@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TextInput} from 'react-native';
 import {Button, Card, Text} from 'react-native-elements';
 import {style, text} from '../styles';
@@ -20,8 +20,13 @@ const Hijo = () => {
   const {postHijo} = useContext(UserContext);
 
   const handleSubmit = () => {
-    if (moment(fechaNacimiento).isValid()) {
-      const fecha = moment(fechaNacimiento).format('YYYY-MM-DD');
+    let fecha = {
+      day: fechaNacimiento.dia,
+      month: fechaNacimiento.mes - 1,
+      year: fechaNacimiento.year,
+    };
+    if (moment(fecha).isValid()) {
+      fecha = moment(fecha).format('YYYY-MM-DD');
       postHijo(nombre, fecha, sexo);
     }
   };

@@ -215,6 +215,11 @@ const App = () => {
         />
         <AuthTab.Screen
           name="Login"
+          component={Login}
+          options={{tabBarVisible: false}}
+        />
+        {/*<AuthTab.Screen
+          name="Login"
           component={LoginPhone}
           options={{tabBarVisible: false}}
         />
@@ -222,7 +227,7 @@ const App = () => {
           name="Code"
           component={Code}
           options={{tabBarVisible: false}}
-        />
+        />*/}
       </AuthTab.Navigator>
     );
   };

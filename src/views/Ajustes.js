@@ -1,5 +1,5 @@
-import React, {useContext, useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, Text, TextInput} from 'react-native';
 import {Button} from 'react-native-elements';
 import DatePicker from '../components/DatePicker';
 import {UserContext} from '../context/UserContext';
@@ -9,8 +9,13 @@ import moment from 'moment';
 
 const Ajustes = () => {
   const [editMode, setEditMode] = useState(false);
-  const {user, setPropiedadUser, updateHijo, signOut} = useContext(UserContext);
-  const [show, setShow] = useState(false);
+  const {user, setPropiedadUser, updateHijo, signOut, getUsuario} = useContext(
+    UserContext,
+  );
+
+  useEffect(() => {
+    getUsuario();
+  }, []);
 
   const renderUsuario = () => {
     if (user && user !== null) {
@@ -18,9 +23,12 @@ const Ajustes = () => {
       fecha_nacimiento = moment(fecha_nacimiento).format('YYYY-MM-DD');
       let fecha_object = {
         dia: fecha_nacimiento.substring(8),
-        mes: fecha_nacimiento.substring(5, 7),
+        mes: parseInt(fecha_nacimiento.substring(5, 7)),
         year: fecha_nacimiento.substring(0, 4),
       };
+      if (fecha_object.dia[0] === '0') {
+        fecha_object.dia = fecha_object.dia[1];
+      }
       if (editMode) {
         return (
           <View style={{marginVertical: 24}}>
@@ -58,9 +66,9 @@ const Ajustes = () => {
       return (
         <View>
           <Text style={[text.h4]}>Nombre</Text>
-          <Text style={[text.p]}>{nombre_hijo}</Text>
+          <Text style={[text.p, {marginBottom: 16}]}>{nombre_hijo}</Text>
           <Text style={[text.h4]}>Fecha de Nacimiento</Text>
-          <Text style={[text.p]}>
+          <Text style={[text.p, {marginBottom: 16}]}>
             {moment(fecha_nacimiento).format('DD MMM YYYY')}
           </Text>
           <Button
@@ -78,7 +86,7 @@ const Ajustes = () => {
       <View style={[style.padding, {paddingTop: 0}]}>
         <Text style={[text.h1, style.bold]}>Ajustes</Text>
         <Text>Notificaciones</Text>
-        <Text style={[text.h2, style.bold, style.mt]}>Datos de tu hijo(a)</Text>
+        <Text style={[text.h3, style.bold, style.mt]}>Datos de tu hijo(a)</Text>
         {renderUsuario()}
         <Button
           title="Cerrar Sesión"
