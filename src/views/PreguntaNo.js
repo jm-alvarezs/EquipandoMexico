@@ -6,35 +6,18 @@ import {colors, layout, style, text} from '../styles';
 import Screen from './Screen';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
-const Pregunta = () => {
-  const {
-    pregunta,
-    preguntas,
-    diagnostico,
-    getPreguntas,
-    getPregunta,
-    postPreguntas,
-    popPregunta,
-    pushPregunta,
-    setRespuestaPregunta,
-  } = useContext(PreguntasContext);
+const PreguntaNo = () => {
+  const {pregunta, getPreguntaNo, setRespuestaPregunta} = useContext(
+    PreguntasContext,
+  );
 
   const route = useRoute();
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (!preguntas || preguntas === null) {
-      const {idTipoPregunta} = route.params;
-      getPreguntas(idTipoPregunta);
-    }
+    const index = route.params.index;
+    getPreguntaNo(index);
   }, []);
-
-  useEffect(() => {
-    if (preguntas !== null && pregunta === null) {
-      const {idPregunta} = route.params;
-      getPregunta(idPregunta);
-    }
-  }, [preguntas]);
 
   const renderPregunta = () => {
     if (pregunta && pregunta !== null) {
@@ -102,19 +85,9 @@ const Pregunta = () => {
         containerStyle={[style.mainButton]}
         buttonStyle={[style.mainButtonInner]}
         onPress={() => {
-          pushPregunta(pregunta);
-          if (pregunta.respuesta === 'Si') {
-            const index = preguntas.findIndex(
-              (question) => question.idPregunta === pregunta.idPregunta,
-            );
-            navigation.navigate('PreguntaSi', {
-              index,
-            });
-          } else {
-            navigation.navigate('PreguntaCheckboxes', {
-              idPregunta: route.params.idPregunta + 1,
-            });
-          }
+          navigation.navigate('Pregunta', {
+            idPregunta: route.params.idPregunta + 1,
+          });
         }}
       />
     );
@@ -132,12 +105,11 @@ const Pregunta = () => {
                 containerStyle={[style.mainButtonInner]}
                 buttonStyle={[style.mainButtonInner]}
                 titleStyle={{color: colors.dark}}
-                onPress={() => {
-                  popPregunta();
+                onPress={() =>
                   navigation.navigate('Pregunta', {
                     idPregunta: route.params.idPregunta - 1,
-                  });
-                }}
+                  })
+                }
               />
             )}
           </View>
@@ -148,4 +120,4 @@ const Pregunta = () => {
   );
 };
 
-export default Pregunta;
+export default PreguntaNo;

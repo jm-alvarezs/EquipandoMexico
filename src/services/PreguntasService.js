@@ -3,6 +3,8 @@ import api from './api';
 const route = '/preguntas';
 
 export default {
-  getPreguntas: () => api.get(route),
+  getTiposPregunta: () => api.get(`${route}/tipos`),
+  getPreguntas: (idTipoPregunta) => api.get(`${route}/${idTipoPregunta}`),
+  getCognicion: (idPregunta) => api.get(`${route}/${idPregunta}`),
   postPreguntas: (preguntas) => api.post(route, {preguntas}),
 };

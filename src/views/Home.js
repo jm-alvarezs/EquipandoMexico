@@ -23,6 +23,9 @@ import Gracias from './Gracias';
 import Citas from './Citas';
 import Hijo from './Hijo';
 import moment from 'moment';
+import PreguntaNo from './PreguntaNo';
+import PreguntaCheckboxes from './PreguntaCheckboxes';
+import Cuestionario from './Cuestionario';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,8 +61,23 @@ const StackDiagnostico = () => {
         options={{headerShown: false}}
       />
       <DiagnosticoNavigator.Screen
+        name="Cuestionario"
+        component={Cuestionario}
+        options={{headerShown: false}}
+      />
+      <DiagnosticoNavigator.Screen
         name="Pregunta"
         component={Pregunta}
+        options={{headerShown: false}}
+      />
+      <DiagnosticoNavigator.Screen
+        name="PreguntaCheckboxes"
+        component={PreguntaCheckboxes}
+        options={{headerShown: false}}
+      />
+      <DiagnosticoNavigator.Screen
+        name="PreguntaNo"
+        component={PreguntaNo}
         options={{headerShown: false}}
       />
     </DiagnosticoNavigator.Navigator>

@@ -45,7 +45,7 @@ const Diagnostico = () => {
           title="Comenzar"
           containerStyle={[style.mainButton, style.shadow]}
           buttonStyle={[style.mainButtonInner]}
-          onPress={() => navigation.navigate('Pregunta', {idPregunta: 1})}
+          onPress={() => navigation.navigate('Cuestionario')}
         />
       </View>
     );
