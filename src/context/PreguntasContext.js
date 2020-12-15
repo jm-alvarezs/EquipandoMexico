@@ -21,6 +21,23 @@ const preguntas = [
     texto: '¿Cómo manejarías esta situación',
     descripcion:
       'Estás en un parque y se te acerca un extraño.  Te invita a seguirlo. ¿Vas con él?',
+    idOpcion: 1,
+    siguiente: 2,
+    anterior: 1,
+    opciones: [
+      {
+        idOpcion: 1,
+        orden: 1,
+        texto: '',
+        descripcion: '',
+      },
+      {
+        idOpcion: 2,
+        orden: 2,
+        texto: '',
+        descripcion: '',
+      },
+    ],
   },
 ];
 

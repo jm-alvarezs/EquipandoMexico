@@ -13,6 +13,7 @@ import {colors} from '../styles';
 import {UserContext} from '../context/UserContext';
 import SignUp from './SignUp';
 import Login from './Login';
+import LoginPhone from './LoginPhone';
 import Code from './Code';
 import AgregarExperto from './AgregarExperto';
 import AgregarContenido from './AgregarContenido';
@@ -214,7 +215,7 @@ const App = () => {
         />
         <AuthTab.Screen
           name="Login"
-          component={Login}
+          component={LoginPhone}
           options={{tabBarVisible: false}}
         />
         <AuthTab.Screen
