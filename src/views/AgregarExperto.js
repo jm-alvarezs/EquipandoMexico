@@ -3,14 +3,15 @@ import {View, Text, TextInput} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import {Button} from 'react-native-elements';
 import {ExpertosContext} from '../context/ExpertosContext';
-import {style, text} from '../styles';
+import {elements, style, text} from '../styles';
 import Screen from './Screen';
 
 const AgregarExperto = () => {
   const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [ubicacion, setUbicacion] = useState('');
+  const [servicio, setServicio] = useState('');
+  const [direccion, setDireccion] = useState({});
   const [file, setFile] = useState(null);
+  const [titulo, setTitulo] = useState('');
 
   const {postExperto} = useContext(ExpertosContext);
 
@@ -25,20 +26,58 @@ const AgregarExperto = () => {
     <Screen title="Agregar Experto">
       <View style={[style.padding, {paddingTop: 0}]}>
         <Text style={[text.h1, style.mb]}>Experto</Text>
-        <Text style={[text.p, style.bold]}>Nombre</Text>
+        <Text style={[text.p]}>Título</Text>
+        <TextInput
+          value={titulo}
+          style={elements.input}
+          onChangeText={(titulo) => setTitulo(titulo)}
+        />
+        <Text style={[text.p]}>Nombre</Text>
         <TextInput
           value={nombre}
+          style={elements.input}
           onChangeText={(nombre) => setNombre(nombre)}
         />
-        <Text style={[text.p, style.bold]}>Descripción</Text>
+        <Text style={[text.p]}>Servicio</Text>
         <TextInput
-          value={descripcion}
-          onChangeText={(descripcion) => setDescripcion(descripcion)}
+          value={servicio}
+          style={elements.input}
+          onChangeText={(servicio) => setServicio(servicio)}
         />
-        <Text style={[text.p, style.bold]}>Ubicación</Text>
+        <Text style={[text.p]}>Ubicación</Text>
+        <Text style={[text.p]}>Calle</Text>
         <TextInput
-          value={ubicacion}
-          onChangeText={(ubicacion) => setUbicacion(ubicacion)}
+          value={direccion.calle}
+          style={elements.input}
+          onChangeText={(calle) => setDireccion({...direccion, calle})}
+        />
+        <Text style={[text.p]}>Número</Text>
+        <TextInput
+          value={direccion.numero}
+          style={elements.input}
+          onChangeText={(numero) => setDireccion({...direccion, numero})}
+        />
+        <Text style={[text.p]}>Número Interior</Text>
+        <TextInput
+          value={direccion.numero_int}
+          style={elements.input}
+          onChangeText={(numero_int) =>
+            setDireccion({...direccion, numero_int})
+          }
+        />
+        <Text style={[text.p]}>Colonia</Text>
+        <TextInput
+          value={direccion.colonia}
+          style={elements.input}
+          onChangeText={(colonia) => setDireccion({...direccion, colonia})}
+        />
+        <Text style={[text.p]}>Código Postal</Text>
+        <TextInput
+          value={direccion.codigo_postal}
+          style={elements.input}
+          onChangeText={(codigo_postal) =>
+            setDireccion({...direccion, codigo_postal})
+          }
         />
         <Text style={[text.p, style.bold]}>Fotografía (opcional)</Text>
         <Button
@@ -50,7 +89,9 @@ const AgregarExperto = () => {
           title="Guardar"
           containerStyle={[style.mainButton, style.mt]}
           buttonStyle={[style.mainButtonInner]}
-          onPress={() => postExperto({nombre, descripcion, ubicacion, file})}
+          onPress={() =>
+            postExperto({nombre, servicio, direccion, file, titulo})
+          }
         />
       </View>
     </Screen>

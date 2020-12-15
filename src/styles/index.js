@@ -12,6 +12,14 @@ export const elements = StyleSheet.create({
   preguntaButton: {
     backgroundColor: 'transparent',
   },
+  input: {
+    borderWidth: 0.5,
+    borderColor: 'rgba(0,0,0,0.2)',
+    borderRadius: 10,
+    padding: 6,
+    marginBottom: 12,
+    marginTop: 6,
+  },
 });
 
 export const text = StyleSheet.create({

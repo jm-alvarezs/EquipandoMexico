@@ -35,12 +35,12 @@ export const ExpertosProvider = ({children}) => {
       AdjuntosService.postAdjunto(formData).then((res) => {
         const {idAdjunto} = res.data;
         experto.idAdjunto = idAdjunto;
-        let data = {...experto};
+        let data = {...experto, ...experto.direccion};
         delete data.file;
         ExpertosService.postExperto(data);
       });
     } else {
-      ExpertosService.postExperto(experto);
+      ExpertosService.postExperto({...experto, ...experto.direccion});
     }
   };
 
