@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {View, TextInput} from 'react-native';
 import {Button, Card, Text} from 'react-native-elements';
-import {layout, style, text} from '../styles';
+import {layout, style, text, colors} from '../styles';
 import Screen from './Screen';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from '../components/DatePicker';
@@ -17,7 +17,7 @@ const Hijo = () => {
   });
   const [sexo, setSexo] = useState('Hombre');
 
-  const {postHijo} = useContext(UserContext);
+  const {postHijo, signOut} = useContext(UserContext);
 
   const handleSubmit = () => {
     let fecha = {
@@ -56,9 +56,9 @@ const Hijo = () => {
           onPress={handleSubmit}
         />
       </Card>
-      <View style={[layout.row]}>
+      <View style={[layout.row, {paddingHorizontal: 0}]}>
         <Button
-          title="Cerrar Sesión"
+          title="Salir"
           containerStyle={[
             style.mainButtonInner,
             {width: 100, marginTop: 32, padding: 0},

@@ -39,7 +39,7 @@ const Expertos = () => {
         <ExpertoCard
           key={experto.idExperto}
           experto={experto}
-          hideAgendar={user.idUsuario !== null}
+          hideAgendar={user.admin !== null}
         />
       ));
     }
@@ -50,7 +50,7 @@ const Expertos = () => {
     <Screen title="Expertos">
       <View style={[style.padding, {paddingTop: 0}]}>
         <Text style={[text.h1, style.bold]}>Expertos</Text>
-        {user.idUsuario !== null && (
+        {user.admin !== null && (
           <Button
             title="Agregar Experto"
             containerStyle={[style.mainButton, style.mt]}

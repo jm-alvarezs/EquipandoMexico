@@ -275,6 +275,10 @@ export const UserProvider = ({children}) => {
     dispatch({type: HIDE_SPINNER});
   }
 
+  function showError(error) {
+    displayError(dispatch, error);
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -283,6 +287,7 @@ export const UserProvider = ({children}) => {
         signUp,
         signOut,
         postHijo,
+        showError,
         getUsuario,
         cancelEdit,
         updateHijo,

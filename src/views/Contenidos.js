@@ -42,7 +42,7 @@ const Contenidos = () => {
     <Screen title="Contenido">
       <View style={[style.padding, {paddingTop: 0}]}>
         <Text style={[text.h1, style.bold]}>Contenidos</Text>
-        {user.idUsuario !== null && (
+        {user.admin !== null && (
           <Button
             title="+ Contenido"
             containerStyle={[style.mainButton, style.mt]}

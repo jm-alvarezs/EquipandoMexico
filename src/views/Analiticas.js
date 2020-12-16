@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {View, Text, Dimensions, Button} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {Card} from 'react-native-elements';
 import {AnaliticasContext} from '../context/AnaliticasContext';
@@ -105,6 +105,16 @@ const Analiticas = () => {
           ]}>
           {renderCitas()}
         </Card>
+        <Button
+          title="Cerrar Sesión"
+          containerStyle={[
+            style.mainButtonInner,
+            {width: 100, marginTop: 32, padding: 0},
+          ]}
+          buttonStyle={{backgroundColor: 'transparent', margin: 0, padding: 0}}
+          titleStyle={{color: colors.danger}}
+          onPress={signOut}
+        />
       </View>
     </Screen>
   );

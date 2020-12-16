@@ -6,7 +6,13 @@ export const BASE_URL =
 
 export const displayError = (dispatch, error) => {
   if (typeof error === 'object') {
-    error = error.toString();
+    if (error.response) {
+      if (error.response.status === 412) {
+        error = 'Ya existe una cuenta con ese número de teléfono.';
+      }
+    } else {
+      error = error.toString();
+    }
   }
   dispatch({type: SHOW_ALERT, payload: error});
 };

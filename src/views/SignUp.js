@@ -14,11 +14,25 @@ const SignUp = () => {
 
   const navigation = useNavigation();
 
-  const {signUp, signIn, created, spinner} = useContext(UserContext);
+  const {signUp, signIn, created, spinner, error, showError} = useContext(
+    UserContext,
+  );
 
   const context = useContext(UserContext);
 
   const handleSubmit = () => {
+    if (nombre === '') {
+      return showError('El nombre no puede estar vacío.');
+    }
+    if (correo === '') {
+      return showError('El correo no puede estar vacío.');
+    }
+    if (password.length < 6) {
+      return showError('La contraseña debe tener al menos 6 caracteres.');
+    }
+    if (telefono.length !== 10) {
+      return showError('El teléfono debe tener 10 dígitos.');
+    }
     signUp(nombre, correo, password, telefono);
   };
 
@@ -33,6 +47,11 @@ const SignUp = () => {
       <View style={[style.padding]}>
         <Text style={[layout.center, text.h1, style.bold]}>Regístrate</Text>
       </View>
+      {error !== null && error && (
+        <Text style={{color: colors.danger, paddingHorizontal: 24}}>
+          {error}
+        </Text>
+      )}
       <Card style={[style.shadow]}>
         <Text>Nombre</Text>
         <TextInput

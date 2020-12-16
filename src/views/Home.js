@@ -210,7 +210,7 @@ const App = () => {
 
   const renderRouter = () => {
     if (user !== null) {
-      if (!user.isAdmin) {
+      if (user.admin !== null) {
         return (
           <Tab.Navigator>
             <Tab.Screen
@@ -239,7 +239,7 @@ const App = () => {
               options={{
                 tabBarLabel: '',
                 tabBarIcon: () => (
-                  <FontAwesome name="cog" color={colors.dark} size={size} />
+                  <FontAwesome name="bars" color={colors.dark} size={size} />
                 ),
               }}
             />

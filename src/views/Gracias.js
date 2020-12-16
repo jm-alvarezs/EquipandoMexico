@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 import {Text, View} from 'react-native';
-import {Button} from 'react-native-elements';
 import {CitasContext} from '../context/CitasContext';
+import {style} from '../styles';
+import Screen from './Screen';
 
 const Gracias = () => {
   const {cita} = useContext(CitasContext);
@@ -19,13 +20,13 @@ const Gracias = () => {
   };
 
   return (
-    <View>
-      <Text>¡Gracias!</Text>
-      <Text>Cita Confirmada</Text>
-      {renderCita()}
-      <Text>¿Quieres agregarla al calendario?</Text>
-      <Button title="Agregar a Calendario" />
-    </View>
+    <Screen title="Equipando">
+      <View style={[style.padding]}>
+        <Text>¡Gracias!</Text>
+        <Text>Cita Confirmada</Text>
+        {renderCita()}
+      </View>
+    </Screen>
   );
 };
 

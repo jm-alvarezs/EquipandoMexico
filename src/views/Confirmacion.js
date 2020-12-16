@@ -7,11 +7,13 @@ import Screen from './Screen';
 import moment from 'moment';
 import {style, text} from '../styles';
 import {ExpertosContext} from '../context/ExpertosContext';
+import {useNavigation} from '@react-navigation/native';
 
 const Confirmacion = () => {
   const {experto} = useContext(ExpertosContext);
   const {espacio} = useContext(EspaciosContext);
   const {postCita} = useContext(CitasContext);
+  const navigation = useNavigation();
   return (
     <Screen title="Confirmar">
       <View style={[style.padding]}>
@@ -39,7 +41,10 @@ const Confirmacion = () => {
           title="Agendar"
           containerStyle={[style.mainButton, style.shadow, style.mt]}
           buttonStyle={[style.mainButtonInner]}
-          onPress={() => postCita(espacio.idEspacio)}
+          onPress={() => {
+            postCita(espacio.idEspacio);
+            navigation.navigate('Gracias');
+          }}
         />
         <View style={[style.my]}>
           <Text style={[text.h4, style.bold]}>Políticas de Reservación</Text>
