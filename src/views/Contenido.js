@@ -50,10 +50,9 @@ const Contenido = () => {
   const renderAdjunto = () => {
     const src = `${BASE_URL}/adjuntos/${contenido.idAdjunto}`;
     if (['mp4', 'mov'].includes(contenido.tipoAdjunto)) {
-      const videoURL = `${src}.mp4`;
       return (
         <Video
-          source={{uri: videoURL}}
+          source={{uri: src}}
           style={{flex: 1, width: '100%', height: 400}}
           controls
           paused
