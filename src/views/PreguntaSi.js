@@ -8,11 +8,13 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 
 const PreguntaSi = () => {
   const {
+    idDiagnostico,
     pregunta,
     preguntas,
     getPregunta,
     postPregunta,
     setPreguntaSi,
+    getDiagnostico,
     setRespuestaPreguntaSi,
   } = useContext(PreguntasContext);
 
@@ -92,6 +94,7 @@ const PreguntaSi = () => {
                     idPregunta,
                   });
                 } else {
+                  getDiagnostico(idDiagnostico);
                   navigation.navigate('Diagnostico');
                 }
               }}
