@@ -18,10 +18,10 @@ async function requestPermissions() {
   }
 }
 
-export async function getCoords() {
+export async function getCoords(callback) {
   await requestPermissions();
   return Geolocation.getCurrentPosition((data) => {
     const {coords} = data;
-    return coords;
+    callback(coords);
   });
 }

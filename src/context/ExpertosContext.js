@@ -14,8 +14,8 @@ export const ExpertosContext = createContext(initialState);
 export const ExpertosProvider = ({children}) => {
   const [state, dispatch] = useReducer(ExpertosReducer, initialState);
 
-  const getExpertos = () => {
-    ExpertosService.getExpertos().then((res) => {
+  const getExpertos = (latitude, longitude) => {
+    ExpertosService.getExpertos(latitude, longitude).then((res) => {
       const {expertos} = res.data;
       dispatch({type: EXPERTOS_RECIBIDOS, payload: expertos});
     });

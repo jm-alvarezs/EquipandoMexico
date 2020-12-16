@@ -5,6 +5,7 @@ import {Button} from 'react-native-elements';
 import ExpertoCard from '../components/ExpertoCard';
 import {ExpertosContext} from '../context/ExpertosContext';
 import {colors, style, text} from '../styles';
+import {getCoords} from '../utils/geolocation';
 import Screen from './Screen';
 
 const Expertos = () => {
@@ -13,8 +14,15 @@ const Expertos = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    getExpertos();
+    getExpertosCoords();
   }, []);
+
+  const getExpertosCoords = async () => {
+    getCoords((coords) => {
+      const {latitude, longitude} = coords;
+      getExpertos(latitude, longitude);
+    });
+  };
 
   const renderExpertos = () => {
     if (expertos && expertos !== null) {

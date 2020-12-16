@@ -1,39 +1,42 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-elements';
-import {UserContext} from '../context/UserContext';
 import {layout, style, text} from '../styles';
 import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
+import {PreguntasContext} from '../context/PreguntasContext';
 
 const Diagnostico = () => {
   const navigation = useNavigation();
 
-  const {user} = useContext(UserContext);
+  const {diagnostico, idDiagnostico, getDiagnostico} = useContext(
+    PreguntasContext,
+  );
+
+  useEffect(() => {
+    getDiagnostico(idDiagnostico);
+  }, []);
 
   const renderDiagnostico = () => {
-    if (user && user !== null) {
-      const {diagnostico} = user;
-      if (diagnostico && diagnostico !== null) {
-        return (
-          <View>
-            <Text style={[text.h1, style.bold]}>Diagnóstico</Text>
-            <Text>Tu diagnóstico</Text>
-            <Text>{diagnostico}</Text>
-            <Text>¿Qué sigue?</Text>
-            <Text>
-              Te ayudaremos con contenido especial para tú y tu hijo(a) para que
-              su desarrollo se incorpore de manera adecuada.
-            </Text>
-            <Button
-              title="Ver Contenido"
-              containerStyle={[styles.secondaryButton, style.shadow]}
-              buttonStyle={[styles.mainButtonInner]}
-              onPress={() => navigation.navigate('Contenido')}
-            />
-          </View>
-        );
-      }
+    if (diagnostico && diagnostico !== null) {
+      return (
+        <View>
+          <Text style={[text.h1, style.bold]}>Diagnóstico</Text>
+          <Text>Tu diagnóstico</Text>
+          <Text>{diagnostico}</Text>
+          <Text>¿Qué sigue?</Text>
+          <Text>
+            Te ayudaremos con contenido especial para tú y tu hijo(a) para que
+            su desarrollo se incorpore de manera adecuada.
+          </Text>
+          <Button
+            title="Ver Contenido"
+            containerStyle={[styles.secondaryButton, style.shadow]}
+            buttonStyle={[styles.mainButtonInner]}
+            onPress={() => navigation.navigate('Contenido')}
+          />
+        </View>
+      );
     }
     return (
       <View style={[layout.center]}>

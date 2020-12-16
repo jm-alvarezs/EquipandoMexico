@@ -10,10 +10,9 @@ const Pregunta = () => {
   const {
     pregunta,
     preguntas,
+    getPregunta,
     getPreguntas,
-    postPreguntas,
-    popPregunta,
-    pushPregunta,
+    postPregunta,
     setRespuestaPregunta,
   } = useContext(PreguntasContext);
 
@@ -21,7 +20,9 @@ const Pregunta = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (!preguntas || preguntas === null) {
+    if (route.params.idPregunta) {
+      getPregunta(route.params.idPregunta);
+    } else {
       const {idTipoPregunta} = route.params;
       getPreguntas(idTipoPregunta);
     }
@@ -71,25 +72,13 @@ const Pregunta = () => {
   };
 
   const renderBoton = () => {
-    if (preguntas && preguntas !== null) {
-      if (preguntas.length === route.params.idPregunta) {
-        return (
-          <Button
-            title="Terminar"
-            onPress={() => postPreguntas(preguntas)}
-            containerStyle={[style.mainButton]}
-            buttonStyle={[style.mainButtonInner]}
-          />
-        );
-      }
-    }
     return (
       <Button
         title="Siguiente"
         containerStyle={[style.mainButton]}
         buttonStyle={[style.mainButtonInner]}
         onPress={() => {
-          pushPregunta(pregunta);
+          postPregunta(pregunta);
           const index = preguntas.findIndex(
             (question) => question.idPregunta === pregunta.idPregunta,
           );
@@ -99,7 +88,7 @@ const Pregunta = () => {
             });
           } else {
             navigation.navigate('PreguntaCheckboxes', {
-              index,
+              idPregunta: pregunta.idPregunta,
             });
           }
         }}
@@ -111,23 +100,8 @@ const Pregunta = () => {
     <Screen title="Pregunta">
       <View style={[layout.padding, {paddingTop: 0, height: 500}]}>
         <View style={[layout.row]}>{renderPregunta()}</View>
-        <View style={[layout.row, {position: 'absolute', bottom: 0}]}>
-          <View style={[layout.half]}>
-            {route.params.idPregunta > 1 && (
-              <Button
-                title="Anterior"
-                containerStyle={[style.mainButtonInner]}
-                buttonStyle={[style.mainButtonInner]}
-                titleStyle={{color: colors.dark}}
-                onPress={() => {
-                  popPregunta();
-                  navigation.navigate('Pregunta', {
-                    idPregunta: route.params.idPregunta - 1,
-                  });
-                }}
-              />
-            )}
-          </View>
+        <View style={[layout.row]}>
+          <View style={[layout.half]}></View>
           <View style={[layout.half]}>{renderBoton()}</View>
         </View>
       </View>

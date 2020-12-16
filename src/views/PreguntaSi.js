@@ -7,16 +7,21 @@ import Screen from './Screen';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
 const PreguntaSi = () => {
-  const {pregunta, preguntas, getPreguntaSi, setRespuestaPregunta} = useContext(
-    PreguntasContext,
-  );
+  const {
+    pregunta,
+    preguntas,
+    getPregunta,
+    postPregunta,
+    setPreguntaSi,
+    setRespuestaPreguntaSi,
+  } = useContext(PreguntasContext);
 
   const route = useRoute();
   const navigation = useNavigation();
 
   useEffect(() => {
     const index = route.params.index;
-    getPreguntaSi(index);
+    setPreguntaSi(index);
   }, []);
 
   const renderPregunta = () => {
@@ -33,7 +38,7 @@ const PreguntaSi = () => {
               <Button
                 title="Sí"
                 onPress={() =>
-                  setRespuestaPregunta(route.params.idPregunta, 'Si')
+                  setRespuestaPreguntaSi(pregunta.idPregunta, 'Si')
                 }
                 containerStyle={
                   pregunta.respuesta === 'Si'
@@ -48,7 +53,7 @@ const PreguntaSi = () => {
               <Button
                 title="No"
                 onPress={() =>
-                  setRespuestaPregunta(route.params.idPregunta, 'No')
+                  setRespuestaPreguntaSi(pregunta.idPregunta, 'No')
                 }
                 containerStyle={
                   pregunta.respuesta === 'No'
@@ -66,54 +71,32 @@ const PreguntaSi = () => {
     return <ActivityIndicator color={colors.dark} />;
   };
 
-  const renderBoton = () => {
-    if (preguntas && preguntas !== null) {
-      if (preguntas.length === route.params.idPregunta) {
-        return (
-          <Button
-            title="Terminar"
-            onPress={() => postPreguntas(preguntas)}
-            containerStyle={[style.mainButton]}
-            buttonStyle={[style.mainButtonInner]}
-          />
-        );
-      }
-    }
-    return (
-      <Button
-        title="Siguiente"
-        containerStyle={[style.mainButton]}
-        buttonStyle={[style.mainButtonInner]}
-        onPress={() => {
-          navigation.navigate('Pregunta', {
-            idPregunta: route.params.idPregunta + 1,
-          });
-        }}
-      />
-    );
-  };
-
   return (
     <Screen title="Pregunta">
       <View style={[layout.padding, {paddingTop: 0, height: '100%'}]}>
         {renderPregunta()}
-        <View style={[layout.row, {position: 'absolute', bottom: 150}]}>
+        <View style={[layout.row, {marginTop: 24}]}>
+          <View style={[layout.half]}></View>
           <View style={[layout.half]}>
-            {route.params.idPregunta > 1 && (
-              <Button
-                title="Anterior"
-                containerStyle={[style.mainButtonInner]}
-                buttonStyle={[style.mainButtonInner]}
-                titleStyle={{color: colors.dark}}
-                onPress={() =>
+            <Button
+              title="Siguiente"
+              containerStyle={[style.mainButton]}
+              buttonStyle={[style.mainButtonInner]}
+              onPress={() => {
+                postPregunta(pregunta);
+                const {index} = route.params;
+                if (preguntas[index + 1]) {
+                  const idPregunta = preguntas[index + 1].idPregunta;
+                  getPregunta(idPregunta);
                   navigation.navigate('Pregunta', {
-                    idPregunta: route.params.idPregunta - 1,
-                  })
+                    idPregunta,
+                  });
+                } else {
+                  navigation.navigate('Diagnostico');
                 }
-              />
-            )}
+              }}
+            />
           </View>
-          <View style={[layout.half]}>{renderBoton()}</View>
         </View>
       </View>
     </Screen>

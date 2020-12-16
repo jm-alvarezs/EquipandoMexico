@@ -9,7 +9,9 @@ import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
 
 const Cuestionario = () => {
-  const {tipos, getTiposPregunta} = useContext(PreguntasContext);
+  const {tipos, getTiposPregunta, postDiagnostico} = useContext(
+    PreguntasContext,
+  );
 
   const navigation = useNavigation();
 
@@ -23,6 +25,7 @@ const Cuestionario = () => {
         <TouchableOpacity
           key={tipoPregunta.idTipoPregunta}
           onPress={() => {
+            postDiagnostico(tipoPregunta.idTipoPregunta);
             navigation.navigate('Pregunta', {
               idTipoPregunta: tipoPregunta.idTipoPregunta,
             });
