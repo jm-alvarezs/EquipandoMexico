@@ -19,6 +19,7 @@ const ExpertoCard = ({experto, hideAgendar}) => {
   const navigation = useNavigation();
 
   const {idExperto, nombre, titulo, servicio, idAdjunto} = experto;
+  const src = `${BASE_URL}/adjuntos/${idAdjunto}`;
   return (
     <Card
       containerStyle={[
@@ -27,7 +28,12 @@ const ExpertoCard = ({experto, hideAgendar}) => {
       ]}>
       <View style={[layout.row]}>
         <View style={[layout.four]}>
-          <Image source={{uri: `${BASE_URL}/adjuntos/${idAdjunto}`}} />
+          <Image
+            source={{uri: src}}
+            width={100}
+            height={100}
+            style={{width: 100, height: 100}}
+          />
         </View>
         <View style={[layout.eight]}>
           <Card.Title style={[text.h3, {textAlign: 'left'}]}>
