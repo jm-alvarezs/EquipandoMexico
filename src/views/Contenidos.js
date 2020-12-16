@@ -4,10 +4,12 @@ import {View, Text, ScrollView, ActivityIndicator} from 'react-native';
 import {Button} from 'react-native-elements';
 import ContenidoCard from '../components/ContenidoCard';
 import {ContenidosContext} from '../context/ContenidosContext';
+import {UserContext} from '../context/UserContext';
 import {colors, style, text} from '../styles';
 import Screen from './Screen';
 
 const Contenidos = () => {
+  const {user} = useContext(UserContext);
   const {contenidos, getContenidos} = useContext(ContenidosContext);
 
   const navigation = useNavigation();
@@ -39,14 +41,16 @@ const Contenidos = () => {
   return (
     <Screen title="Contenido">
       <View style={[style.padding, {paddingTop: 0}]}>
-        <Text style={[text.h1, style.bold, style.mb]}>Contenidos</Text>
-        <ScrollView>{renderContenidos()}</ScrollView>
-        <Button
-          title="+ Contenido"
-          containerStyle={[style.mainButton, style.mt]}
-          buttonStyle={[style.mainButtonInner]}
-          onPress={() => navigation.navigate('AgregarContenido')}
-        />
+        <Text style={[text.h1, style.bold]}>Contenidos</Text>
+        {user.idUsuario !== null && (
+          <Button
+            title="+ Contenido"
+            containerStyle={[style.mainButton, style.mt]}
+            buttonStyle={[style.mainButtonInner]}
+            onPress={() => navigation.navigate('AgregarContenido')}
+          />
+        )}
+        <ScrollView style={[style.mt]}>{renderContenidos()}</ScrollView>
       </View>
     </Screen>
   );

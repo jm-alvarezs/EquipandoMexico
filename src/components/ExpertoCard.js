@@ -6,7 +6,7 @@ import {layout, style, text} from '../styles';
 import {BASE_URL} from '../utils';
 import {useNavigation} from '@react-navigation/native';
 
-const ExpertoCard = ({experto}) => {
+const ExpertoCard = ({experto, hideAgendar}) => {
   const renderDireccion = (experto) => {
     return ['calle', 'numero', 'numero_int', 'colonia']
       .map((key) =>
@@ -36,16 +36,18 @@ const ExpertoCard = ({experto}) => {
           <Text style={[text.h4]}>{servicio}</Text>
           <Text style={[text.h5, style.bold, style.mt]}>Ubicación</Text>
           <Text style={[style.mb]}>{renderDireccion(experto)}</Text>
-          <Button
-            title="Agendar"
-            containerStyle={[style.mainButton]}
-            buttonStyle={[style.mainButtonInner]}
-            onPress={() => {
-              navigation.navigate('Agenda', {
-                idExperto,
-              });
-            }}
-          />
+          {!hideAgendar && (
+            <Button
+              title="Agendar"
+              containerStyle={[style.mainButton]}
+              buttonStyle={[style.mainButtonInner]}
+              onPress={() => {
+                navigation.navigate('Agenda', {
+                  idExperto,
+                });
+              }}
+            />
+          )}
         </View>
       </View>
     </Card>

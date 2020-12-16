@@ -28,6 +28,7 @@ import PreguntaSi from './PreguntaSi';
 import PreguntaCheckboxes from './PreguntaCheckboxes';
 import Cuestionario from './Cuestionario';
 import Confirmacion from './Confirmacion';
+import Analiticas from './Analiticas';
 
 const Tab = createBottomTabNavigator();
 
@@ -209,6 +210,42 @@ const App = () => {
 
   const renderRouter = () => {
     if (user !== null) {
+      if (!user.isAdmin) {
+        return (
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Expertos"
+              component={Expertos}
+              options={{
+                tabBarLabel: '',
+                tabBarIcon: () => (
+                  <FontAwesome name="users" color={colors.dark} size={size} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Contenidos"
+              component={Contenidos}
+              options={{
+                tabBarLabel: '',
+                tabBarIcon: () => (
+                  <FontAwesome name="play" color={colors.dark} size={size} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Analiticas"
+              component={Analiticas}
+              options={{
+                tabBarLabel: '',
+                tabBarIcon: () => (
+                  <FontAwesome name="cog" color={colors.dark} size={size} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        );
+      }
       if (user.fecha_nacimiento === null && !hijoCreated) {
         return (
           <Tab.Navigator>

@@ -28,6 +28,8 @@ const initialState = {
   direccion: null,
   hijoCreated: null,
   spinner: false,
+  error: null,
+  success: null,
 };
 
 export const UserContext = createContext(initialState);

@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import {AnaliticasProvider} from './context/AnaliticasContext';
 import {CitasProvider} from './context/CitasContext';
 import {ContenidosProvider} from './context/ContenidosContext';
 import {EspaciosProvider} from './context/EspaciosContext';
@@ -23,9 +24,11 @@ const App = () => {
           <PreguntasProvider>
             <CitasProvider>
               <EspaciosProvider>
-                <UserProvider>
-                  <Home />
-                </UserProvider>
+                <AnaliticasProvider>
+                  <UserProvider>
+                    <Home />
+                  </UserProvider>
+                </AnaliticasProvider>
               </EspaciosProvider>
             </CitasProvider>
           </PreguntasProvider>

@@ -9,6 +9,9 @@ import {
   SET_PROPIEDAD_LOGIN,
   CONFIRM_RECIBIDO,
   HIJO_CREATED,
+  CLEAR_ALERT,
+  SHOW_SUCCESS,
+  CLEAR_SUCCESS,
 } from '../types';
 
 export default (state, {type, payload}) => {
@@ -40,6 +43,14 @@ export default (state, {type, payload}) => {
     case HIJO_CREATED: {
       return {...state, hijoCreated: true};
     }
+    case SHOW_ALERT:
+      return {...state, error: payload};
+    case CLEAR_ALERT:
+      return {...state, error: null};
+    case SHOW_SUCCESS:
+      return {...state, success: payload};
+    case CLEAR_SUCCESS:
+      return {...state, success: null};
     default:
       return {...state};
   }

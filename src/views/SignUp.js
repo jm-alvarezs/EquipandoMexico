@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const navigation = useNavigation();
 
-  const {signUp, signIn, created} = useContext(UserContext);
+  const {signUp, signIn, created, spinner} = useContext(UserContext);
 
   const context = useContext(UserContext);
 
@@ -66,10 +66,11 @@ const SignUp = () => {
           textContentType="telephoneNumber"
         />
         <Button
-          title="Registrarte"
-          containerStyle={[style.mainButton]}
+          title={spinner ? 'Cargando...' : 'Registrarte'}
+          containerStyle={[spinner ? style.mainButtonInner : style.mainButton]}
           buttonStyle={[style.mainButtonInner]}
           onPress={handleSubmit}
+          disabled={spinner}
         />
       </Card>
       <View style={[style.padding, {paddingTop: 0}]}>
