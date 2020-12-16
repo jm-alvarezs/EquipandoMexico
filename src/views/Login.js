@@ -19,7 +19,7 @@ const Login = () => {
   };
 
   return (
-    <Screen title="Equipando">
+    <Screen title="OPTI">
       <View style={[style.padding, {paddingVertical: 0}]}>
         <Text style={[text.h1, style.bold, layout.center]}>Entrar</Text>
       </View>

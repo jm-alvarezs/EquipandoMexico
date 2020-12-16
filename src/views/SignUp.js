@@ -43,7 +43,7 @@ const SignUp = () => {
   }, [created]);
 
   return (
-    <Screen title="Equipando">
+    <Screen title="OPTI">
       <View style={[style.padding]}>
         <Text style={[layout.center, text.h1, style.bold]}>Regístrate</Text>
       </View>

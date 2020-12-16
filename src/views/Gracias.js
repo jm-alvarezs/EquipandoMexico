@@ -26,7 +26,7 @@ const Gracias = () => {
   };
 
   return (
-    <Screen title="Equipando">
+    <Screen title="OPTI">
       <View style={[style.padding]}>
         <Text style={[text.h1, style.bold]}>¡Gracias!</Text>
         <Text style={[text.h2, style.mt]}>Cita Confirmada</Text>
