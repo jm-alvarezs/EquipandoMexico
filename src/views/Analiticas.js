@@ -20,7 +20,6 @@ const Analiticas = () => {
   }, []);
 
   const renderTotalUsuarios = () => {
-    console.log(usuarios);
     if (usuarios && usuarios !== null) {
       return (
         <View style={[layout.row]}>
@@ -70,6 +69,11 @@ const Analiticas = () => {
 
   const renderCitas = () => {
     if (citas && citas !== null) {
+      if (citas[0]) {
+        if (citas[0].nombre === null) {
+          return <Text>No hay citas agendadas</Text>;
+        }
+      }
       return citas.map(({nombre, citas}) => (
         <View key={nombre} style={[layout.row]}>
           <View style={[layout.half]}>
@@ -86,7 +90,7 @@ const Analiticas = () => {
   return (
     <Screen title="Analiticas">
       <View style={[layout.padding, {paddingTop: 0}]}>
-        <Text style={[text.h1]}>Analiticas</Text>
+        <Text style={[text.h1, style.bold]}>Analiticas</Text>
         <Card
           containerStyle={[
             {borderRadius: 10, borderWidth: 0, marginHorizontal: 0},
