@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {Button, Card} from 'react-native-elements';
 import {CitasContext} from '../context/CitasContext';
@@ -12,8 +12,15 @@ import {useNavigation} from '@react-navigation/native';
 const Confirmacion = () => {
   const {experto} = useContext(ExpertosContext);
   const {espacio} = useContext(EspaciosContext);
-  const {postCita} = useContext(CitasContext);
+  const {spinner, created, postCita} = useContext(CitasContext);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (created) {
+      navigation.navigate('Gracias');
+    }
+  }, [created]);
+
   return (
     <Screen title="Confirmar">
       <View style={[style.padding]}>
@@ -39,12 +46,16 @@ const Confirmacion = () => {
         </Card>
         <Button
           title="Agendar"
-          containerStyle={[style.mainButton, style.shadow, style.mt]}
+          containerStyle={[
+            spinner ? style.mainButtonInner : style.mainButton,
+            style.shadow,
+            style.mt,
+          ]}
           buttonStyle={[style.mainButtonInner]}
           onPress={() => {
             postCita(espacio.idEspacio);
-            navigation.navigate('Gracias');
           }}
+          disabled={spinner}
         />
         <View style={[style.my]}>
           <Text style={[text.h4, style.bold]}>Políticas de Reservación</Text>

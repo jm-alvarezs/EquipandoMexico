@@ -1,8 +1,13 @@
 import React, {createContext, useReducer} from 'react';
 import CitasReducer from '../reducers/CitasReducer';
 import CitasService from '../services/CitasService';
-import {CITAS_RECIBIDAS, SET_CITA, SET_PROPIEDAD_CITA} from '../types';
-import moment from 'moment';
+import {
+  CITAS_RECIBIDAS,
+  SET_CITA,
+  SET_PROPIEDAD_CITA,
+  SHOW_SPINNER,
+  USER_CREATED,
+} from '../types';
 
 const initialState = {
   citas: null,
@@ -29,7 +34,10 @@ export const CitasProvider = ({children}) => {
   };
 
   const postCita = (idEspacio) => {
-    CitasService.postCita(idEspacio);
+    dispatch({type: SHOW_SPINNER});
+    CitasService.postCita(idEspacio).then(() => {
+      dispatch({type: USER_CREATED});
+    });
   };
 
   const updateCita = (cita) => {

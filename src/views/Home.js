@@ -225,7 +225,7 @@ const App = () => {
             />
             <Tab.Screen
               name="Contenidos"
-              component={Contenidos}
+              component={StackContenidos}
               options={{
                 tabBarLabel: '',
                 tabBarIcon: () => (

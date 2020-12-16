@@ -1,8 +1,9 @@
 import React, {useContext, useEffect} from 'react';
-import {View, Text, Dimensions, Button} from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
-import {Card} from 'react-native-elements';
+import {Card, Button} from 'react-native-elements';
 import {AnaliticasContext} from '../context/AnaliticasContext';
+import {UserContext} from '../context/UserContext';
 import {colors, layout, style, text} from '../styles';
 import Screen from './Screen';
 
@@ -11,12 +12,15 @@ const Analiticas = () => {
     AnaliticasContext,
   );
 
+  const {signOut} = useContext(UserContext);
+
   useEffect(() => {
     getUsuarios();
     getCitas();
   }, []);
 
   const renderTotalUsuarios = () => {
+    console.log(usuarios);
     if (usuarios && usuarios !== null) {
       return (
         <View style={[layout.row]}>
@@ -45,17 +49,19 @@ const Analiticas = () => {
           data={{
             datasets: [
               {
-                data: usuariosdia,
+                labels: usuariosdia.map((usuario) => usuario.fecha),
+                data: usuariosdia.map((usuario) => usuario.usuarios),
               },
             ],
           }}
           width={Dimensions.get('window').width * 0.825} // from react-native
-          height={220}
+          height={300}
           chartConfig={{
             backgroundGradientFrom: '#fff',
             backgroundGradientTo: '#fff',
             color: () => colors.accent,
           }}
+          style={{marginLeft: -12, marginBottom: -12}}
           bezier
         />
       );
@@ -111,7 +117,7 @@ const Analiticas = () => {
             style.mainButtonInner,
             {width: 100, marginTop: 32, padding: 0},
           ]}
-          buttonStyle={{backgroundColor: 'transparent', margin: 0, padding: 0}}
+          buttonStyle={[style.mainButtonInner, {padding: 0}]}
           titleStyle={{color: colors.danger}}
           onPress={signOut}
         />

@@ -1,4 +1,9 @@
-import {CONTENIDOS_RECIBIDOS, SET_CONTENIDO} from '../types';
+import {
+  CONTENIDOS_RECIBIDOS,
+  SET_CONTENIDO,
+  SHOW_SPINNER,
+  USER_CREATED,
+} from '../types';
 
 export default (state, {type, payload}) => {
   switch (type) {
@@ -10,6 +15,10 @@ export default (state, {type, payload}) => {
         (content) => content.idContenido === payload,
       );
       return {...state, contenido};
+    case SHOW_SPINNER:
+      return {...state, spinner: true};
+    case USER_CREATED:
+      return {...state, created: true, spinner: false};
     default:
       return state;
   }

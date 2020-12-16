@@ -24,8 +24,10 @@ export const AnaliticasProvider = ({children}) => {
       const {usuarios} = res.data;
       dispatch({type: USUARIOS_RECIBIDOS, payload: usuarios.usuarios});
     });
-    const fecha_fin = moment();
-    const fecha_inicio = fecha_fin.subtract(1, 'month');
+    let fecha_fin = moment();
+    let fecha_inicio = moment().subtract(1, 'month');
+    fecha_fin = fecha_fin.format('YYYY-MM-DD');
+    fecha_inicio = fecha_inicio.format('YYYY-MM-DD');
     AnaliticasService.getUsuariosDia(fecha_inicio, fecha_fin).then((res) => {
       const {usuarios} = res.data;
       dispatch({type: USUARIOS_DIA_RECIBIDOS, payload: usuarios});

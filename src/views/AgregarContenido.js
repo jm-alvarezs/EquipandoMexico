@@ -1,10 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {Button} from 'react-native-elements';
 import {ContenidosContext} from '../context/ContenidosContext';
 import DocumentPicker from 'react-native-document-picker';
-import {style, text} from '../styles';
+import {elements, style, text} from '../styles';
 import Screen from './Screen';
+import {useNavigation} from '@react-navigation/native';
 
 const AgregarContenido = () => {
   const [titulo, setTitulo] = useState('');
@@ -20,7 +21,15 @@ const AgregarContenido = () => {
     setFile(result);
   };
 
-  const {postContenido} = useContext(ContenidosContext);
+  const {spinner, created, postContenido} = useContext(ContenidosContext);
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (created) {
+      navigation.navigate('Contenidos');
+    }
+  }, [created]);
 
   return (
     <Screen title="+ Contenido">
@@ -29,18 +38,25 @@ const AgregarContenido = () => {
         <Text style={[text.p, style.bold]}>Título</Text>
         <TextInput
           value={titulo}
+          style={[elements.input]}
           onChangeText={(titulo) => setTitulo(titulo)}
         />
         <Text style={[text.p, style.bold]}>Tipo de Contenido</Text>
-        <TextInput value={tipo} onChangeText={(tipo) => setTipo(tipo)} />
+        <TextInput
+          value={tipo}
+          style={[elements.input]}
+          onChangeText={(tipo) => setTipo(tipo)}
+        />
         <Text style={[text.p, style.bold]}>Contenido</Text>
         <TextInput
           value={contenido}
+          style={[elements.input]}
           onChangeText={(contenido) => setContenido(contenido)}
         />
         <Text style={[text.p, style.bold]}>Enlace (opcional)</Text>
         <TextInput
           value={enlace}
+          style={[elements.input]}
           onChangeText={(enlace) => setEnlace(enlace)}
         />
         <Text style={[text.p, style.bold]}>Multimedia</Text>
@@ -51,8 +67,11 @@ const AgregarContenido = () => {
         />
         <Button
           title="Guardar"
-          onPress={() => postContenido({titulo, tipo, file, contenido})}
-          containerStyle={[style.mainButton]}
+          onPress={() => postContenido({titulo, tipo, file, contenido, enlace})}
+          containerStyle={[
+            spinner ? style.mainButtonInner : style.mainButton,
+            style.mt,
+          ]}
           buttonStyle={[style.mainButtonInner]}
         />
       </View>
