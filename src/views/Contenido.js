@@ -22,7 +22,7 @@ const Contenido = () => {
     if (contenido && contenido !== null) {
       const {nombre, descripcion, enlace} = contenido;
       return (
-        <>
+        <View>
           {renderAdjunto()}
           <Text style={[text.h1, style.mb, style.bold]}>{nombre}</Text>
           <Text>{descripcion}</Text>
@@ -33,7 +33,7 @@ const Contenido = () => {
               buttonStyle={[style.mainButtonInner]}
             />
           )}
-        </>
+        </View>
       );
     }
   };
@@ -41,9 +41,20 @@ const Contenido = () => {
   const renderAdjunto = () => {
     const src = `${BASE_URL}/adjuntos/${contenido.idAdjunto}`;
     if (['mp4', 'mov'].includes(contenido.tipoAdjunto)) {
-      return <Video source={{uri: src}} />;
+      return (
+        <Video
+          source={{uri: src}}
+          style={{width: '100%', height: 200}}
+          controls
+        />
+      );
     }
-    return <Image source={{uri: src}} width="100%" height="100%" />;
+    return (
+      <Image
+        source={{uri: src}}
+        containerStyle={{width: '100%', height: 200}}
+      />
+    );
   };
 
   return (
