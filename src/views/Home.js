@@ -215,7 +215,7 @@ const App = () => {
           <Tab.Navigator>
             <Tab.Screen
               name="Expertos"
-              component={Expertos}
+              component={StackExpertos}
               options={{
                 tabBarLabel: '',
                 tabBarIcon: () => (

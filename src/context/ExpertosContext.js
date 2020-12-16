@@ -2,7 +2,12 @@ import React, {createContext, useReducer} from 'react';
 import ExpertosReducer from '../reducers/ExpertosReducer';
 import AdjuntosService from '../services/AdjuntosService';
 import ExpertosService from '../services/ExpertosService';
-import {EXPERTOS_RECIBIDOS, SET_EXPERTO} from '../types';
+import {
+  EXPERTOS_RECIBIDOS,
+  SET_EXPERTO,
+  SHOW_SPINNER,
+  USER_CREATED,
+} from '../types';
 
 const initialState = {
   expertos: null,
@@ -29,6 +34,7 @@ export const ExpertosProvider = ({children}) => {
   };
 
   const postExperto = (experto) => {
+    dispatch({type: SHOW_SPINNER});
     if (experto.file && experto.file !== null) {
       const formData = new FormData();
       formData.append('adjunto', experto.file);
@@ -37,10 +43,16 @@ export const ExpertosProvider = ({children}) => {
         experto.idAdjunto = idAdjunto;
         let data = {...experto, ...experto.direccion};
         delete data.file;
-        ExpertosService.postExperto(data);
+        ExpertosService.postExperto(data).then(() => {
+          dispatch({type: USER_CREATED});
+        });
       });
     } else {
-      ExpertosService.postExperto({...experto, ...experto.direccion});
+      ExpertosService.postExperto({...experto, ...experto.direccion}).then(
+        () => {
+          dispatch({type: USER_CREATED});
+        },
+      );
     }
   };
 

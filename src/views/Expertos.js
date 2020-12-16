@@ -15,6 +15,10 @@ const Expertos = () => {
 
   const navigation = useNavigation();
 
+  navigation.addListener('focus', () => {
+    getExpertosCoords();
+  });
+
   useEffect(() => {
     getExpertosCoords();
   }, []);

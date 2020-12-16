@@ -1,4 +1,5 @@
-import React, {useContext, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import {Button} from 'react-native-elements';
@@ -13,7 +14,15 @@ const AgregarExperto = () => {
   const [file, setFile] = useState(null);
   const [titulo, setTitulo] = useState('');
 
-  const {postExperto} = useContext(ExpertosContext);
+  const {postExperto, created, spinner} = useContext(ExpertosContext);
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (created) {
+      navigation.navigate('Expertos');
+    }
+  }, [created]);
 
   const handleFile = async () => {
     const result = await DocumentPicker.pick({
@@ -87,11 +96,15 @@ const AgregarExperto = () => {
         />
         <Button
           title="Guardar"
-          containerStyle={[style.mainButton, style.mt]}
+          containerStyle={[
+            spinner ? style.mainButtonInner : style.mainButton,
+            style.mt,
+          ]}
           buttonStyle={[style.mainButtonInner]}
           onPress={() =>
             postExperto({nombre, servicio, direccion, file, titulo})
           }
+          disabled={spinner}
         />
       </View>
     </Screen>
