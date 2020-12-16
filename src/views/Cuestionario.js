@@ -30,7 +30,7 @@ const Cuestionario = () => {
               idTipoPregunta: tipoPregunta.idTipoPregunta,
             });
           }}>
-          <Card containerStyle={{borderRadius: 10, borderWidth: 0}}>
+          <Card containerStyle={[{borderRadius: 10, borderWidth: 0}]}>
             <Text style={[text.h4]}>{tipoPregunta.nombre}</Text>
           </Card>
         </TouchableOpacity>

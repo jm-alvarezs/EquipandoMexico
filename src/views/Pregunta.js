@@ -72,28 +72,33 @@ const Pregunta = () => {
   };
 
   const renderBoton = () => {
-    return (
-      <Button
-        title="Siguiente"
-        containerStyle={[style.mainButton]}
-        buttonStyle={[style.mainButtonInner]}
-        onPress={() => {
-          postPregunta(pregunta);
-          const index = preguntas.findIndex(
-            (question) => question.idPregunta === pregunta.idPregunta,
-          );
-          if (pregunta.respuesta === 'Si') {
-            navigation.navigate('PreguntaSi', {
-              index,
-            });
-          } else {
-            navigation.navigate('PreguntaCheckboxes', {
-              idPregunta: pregunta.idPregunta,
-            });
-          }
-        }}
-      />
-    );
+    if (pregunta && pregunta !== null) {
+      return (
+        <Button
+          title="Siguiente"
+          containerStyle={[
+            !pregunta.respuesta ? style.mainButtonInner : style.mainButton,
+          ]}
+          buttonStyle={[style.mainButtonInner]}
+          onPress={() => {
+            postPregunta(pregunta);
+            const index = preguntas.findIndex(
+              (question) => question.idPregunta === pregunta.idPregunta,
+            );
+            if (pregunta.respuesta === 'Si') {
+              navigation.navigate('PreguntaSi', {
+                index,
+              });
+            } else {
+              navigation.navigate('PreguntaCheckboxes', {
+                idPregunta: pregunta.idPregunta,
+              });
+            }
+          }}
+          disabled={!pregunta.respuesta}
+        />
+      );
+    }
   };
 
   return (

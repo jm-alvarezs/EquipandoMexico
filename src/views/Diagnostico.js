@@ -9,7 +9,7 @@ import {PreguntasContext} from '../context/PreguntasContext';
 const Diagnostico = () => {
   const navigation = useNavigation();
 
-  const {diagnostico, idDiagnostico, getDiagnostico} = useContext(
+  const {resultados, idDiagnostico, getDiagnostico} = useContext(
     PreguntasContext,
   );
 
@@ -17,47 +17,45 @@ const Diagnostico = () => {
     getDiagnostico(idDiagnostico);
   }, []);
 
-  const renderDiagnostico = () => {
-    if (diagnostico && diagnostico !== null) {
+  const renderDiagnosticos = () => {
+    return resultados.map((resultado) => (
+      <View style={[layout.row]}>
+        <View style={[layout.half]}>
+          <Text style={[text.h2]}>{resultado.nombre}</Text>
+        </View>
+        <View style={[layout.half]}>
+          <Text style={[text.h2]}>{resultado.porcentaje}</Text>
+        </View>
+      </View>
+    ));
+  };
+
+  const renderResultado = () => {
+    if (resultados && resultados !== null) {
       return (
         <View>
-          <Text style={[text.h1, style.bold]}>Diagnóstico</Text>
-          <Text style={[text.h4, style.mt]}>Tu diagnóstico:</Text>
-          <Text style={[text.h2]}>{diagnostico.nombre}</Text>
+          <Text style={[text.h1, style.bold]}>Resultado</Text>
+          {renderDiagnosticos()}
           <Text style={[text.h4, style.bold, style.mt]}>¿Qué sigue?</Text>
           <Text>
-            Te ayudaremos con contenido especial para tú y tu hijo(a) para que
-            su desarrollo se incorpore de manera adecuada.
+            Puedes asesorarte con un experto en los indicadores que más necesita
+            apoyo tu hijo(a).
           </Text>
           <Button
-            title="Ver Contenido"
+            title="Ir a Expertos"
             containerStyle={[style.mainButton, style.mt]}
             buttonStyle={[style.mainButtonInner]}
-            onPress={() => navigation.navigate('Contenido')}
+            onPress={() => navigation.navigate('Expertos')}
           />
         </View>
       );
     }
-    /*return (
-      <View style={[layout.center]}>
-        <Text style={[text.h2, style.bold, style.my]}>¡Completa el Test!</Text>
-        <Text style={[style.mb, layout.center, text.h4]}>
-          Recibe un diagnóstico para que mejores el desarrollo de tu hijo(a)
-        </Text>
-        <Button
-          title="Comenzar"
-          containerStyle={[style.mainButton, style.shadow]}
-          buttonStyle={[style.mainButtonInner]}
-          onPress={() => navigation.navigate('Cuestionario')}
-        />
-      </View>
-    );*/
   };
 
   return (
     <Screen title="Diagnóstico">
       <View style={[style.padding, {paddingTop: 0, height: 800}]}>
-        {renderDiagnostico()}
+        {renderResultado()}
       </View>
     </Screen>
   );

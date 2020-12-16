@@ -15,7 +15,7 @@ import {
   SET_PREGUNTA_SI,
   SET_RESPUESTA_PREGUNTA_SI,
   RESPUESTA_RECIBIDA,
-  DIAGNOSTICO_RECIBIDO,
+  RESULTADOS_RECIBIDOS,
   SET_DIAGNOSTICO,
 } from '../types';
 
@@ -126,8 +126,8 @@ export default (state, {type, payload}) => {
     case SET_DIAGNOSTICO: {
       return {...state, idDiagnostico: payload};
     }
-    case DIAGNOSTICO_RECIBIDO: {
-      return {...state, diagnostico: payload};
+    case RESULTADOS_RECIBIDOS: {
+      return {...state, resultados: payload};
     }
     default:
       return state;

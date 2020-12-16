@@ -27,8 +27,6 @@ const PreguntaCheckboxes = () => {
     getCognicion(idPregunta);
   }, []);
 
-  console.log(idDiagnostico);
-
   const renderOpciones = () => {
     if (opciones && opciones !== null) {
       return opciones.map((opcion) => (
@@ -46,6 +44,16 @@ const PreguntaCheckboxes = () => {
     }
   };
 
+  const isDisabled = () => {
+    let disabled = true;
+    if (opciones && opciones !== null) {
+      opciones.forEach((opcion) => {
+        if (opcion.checked) disabled = false;
+      });
+    }
+    return disabled;
+  };
+
   return (
     <Screen title="Pregunta">
       <View style={[layout.padding, {paddingTop: 0, height: 500}]}>
@@ -56,7 +64,9 @@ const PreguntaCheckboxes = () => {
           <View style={[layout.half]}>
             <Button
               title="Siguiente"
-              containerStyle={[style.mainButton]}
+              containerStyle={[
+                isDisabled() ? style.mainButtonInner : style.mainButton,
+              ]}
               buttonStyle={[style.mainButtonInner]}
               onPress={() => {
                 postCognicion(idDiagnostico, idRespuesta, opciones);
@@ -67,6 +77,7 @@ const PreguntaCheckboxes = () => {
                   index,
                 });
               }}
+              disabled={isDisabled()}
             />
           </View>
         </View>

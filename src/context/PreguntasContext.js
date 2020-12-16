@@ -19,7 +19,7 @@ import {
   SET_PREGUNTA_SI,
   SET_RESPUESTA_PREGUNTA_SI,
   RESPUESTA_RECIBIDA,
-  DIAGNOSTICO_RECIBIDO,
+  RESULTADOS_RECIBIDOS,
   SET_DIAGNOSTICO,
 } from '../types';
 
@@ -53,7 +53,6 @@ export const PreguntasProvider = ({children}) => {
       const preguntasSi = si;
       const preguntasNo = no;
       const preguntas = principales;
-      console.log(res.data);
       dispatch({
         type: PREGUNTAS_RECIBIDAS,
         payload: {preguntas, preguntasSi, preguntasNo},
@@ -113,7 +112,6 @@ export const PreguntasProvider = ({children}) => {
   }
 
   const setRespuestaPregunta = (idPregunta, respuesta) => {
-    console.log(idPregunta, respuesta);
     dispatch({type: SET_RESPUESTA_PREGUNTA, payload: {idPregunta, respuesta}});
   };
 
@@ -159,8 +157,8 @@ export const PreguntasProvider = ({children}) => {
 
   const getDiagnostico = (idDiagnostico) => {
     DiagnosticosService.getDiagnostico(idDiagnostico).then((res) => {
-      const {diagnostico} = res.data;
-      dispatch({type: DIAGNOSTICO_RECIBIDO, payload: diagnostico});
+      const {resultados} = res.data;
+      dispatch({type: RESULTADOS_RECIBIDOS, payload: resultados});
     });
   };
 

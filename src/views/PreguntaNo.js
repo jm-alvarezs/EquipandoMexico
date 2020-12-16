@@ -82,7 +82,9 @@ const PreguntaNo = () => {
           <View style={[layout.half]}>
             <Button
               title="Siguiente"
-              containerStyle={[style.mainButton]}
+              containerStyle={[
+                !pregunta.respuesta ? style.mainButtonInner : style.mainButton,
+              ]}
               buttonStyle={[style.mainButtonInner]}
               onPress={() => {
                 postPregunta(pregunta);
@@ -98,6 +100,7 @@ const PreguntaNo = () => {
                   navigation.navigate('Diagnostico');
                 }
               }}
+              disabled={!pregunta.respuesta}
             />
           </View>
         </View>

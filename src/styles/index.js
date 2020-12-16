@@ -53,7 +53,7 @@ export const style = StyleSheet.create({
       width: 3,
       height: 3,
     },
-    elevation: 60,
+    elevation: 10,
     shadowOpacity: 0.3,
     shadowRadius: 20,
   },
