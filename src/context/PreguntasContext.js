@@ -53,6 +53,7 @@ export const PreguntasProvider = ({children}) => {
       const preguntasSi = si;
       const preguntasNo = no;
       const preguntas = principales;
+      console.log(res.data);
       dispatch({
         type: PREGUNTAS_RECIBIDAS,
         payload: {preguntas, preguntasSi, preguntasNo},
@@ -61,7 +62,6 @@ export const PreguntasProvider = ({children}) => {
   }
 
   function getPregunta(idPregunta) {
-    console.log(idPregunta);
     dispatch({type: SET_PREGUNTA, payload: idPregunta});
   }
 

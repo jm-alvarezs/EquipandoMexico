@@ -14,7 +14,9 @@ const SignUp = () => {
 
   const navigation = useNavigation();
 
-  const {signUp, created} = useContext(UserContext);
+  const {signUp, signIn, created} = useContext(UserContext);
+
+  const context = useContext(UserContext);
 
   const handleSubmit = () => {
     signUp(nombre, correo, password, telefono);
@@ -22,7 +24,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (created) {
-      navigation.navigate('Login');
+      signIn(context.correo, context.password);
     }
   }, [created]);
 

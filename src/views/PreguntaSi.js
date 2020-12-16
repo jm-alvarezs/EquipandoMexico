@@ -23,6 +23,7 @@ const PreguntaSi = () => {
 
   useEffect(() => {
     const index = route.params.index;
+    console.log(index);
     setPreguntaSi(index);
   }, []);
 

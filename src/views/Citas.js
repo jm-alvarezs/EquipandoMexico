@@ -8,7 +8,7 @@ import Screen from './Screen';
 import {useNavigation} from '@react-navigation/native';
 
 const Citas = () => {
-  const {citas, getMisCitas} = useContext(CitasContext);
+  const {citas, setCita, getMisCitas} = useContext(CitasContext);
 
   const navigation = useNavigation();
 
@@ -25,7 +25,9 @@ const Citas = () => {
           </Text>
         );
       }
-      return citas.map((cita) => <CitaCard key={cita.idCita} cita={cita} />);
+      return citas.map((cita) => (
+        <CitaCard key={cita.idCita} cita={cita} setCita={setCita} />
+      ));
     }
     return <ActivityIndicator color={colors.dark} />;
   };
@@ -34,7 +36,7 @@ const Citas = () => {
     <Screen title="Citas">
       <View style={[style.padding, {paddingTop: 0}]}>
         <Text style={[text.h1, style.bold]}>Mis Citas</Text>
-        <ScrollView>{renderCitas()}</ScrollView>
+        <ScrollView style={[style.mb]}>{renderCitas()}</ScrollView>
         <Button
           title="Agendar"
           containerStyle={[style.mainButton]}

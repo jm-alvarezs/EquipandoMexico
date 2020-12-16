@@ -15,7 +15,6 @@ export const EspaciosProvider = ({children}) => {
   const getEspaciosExperto = ({idExperto}) => {
     EspaciosService.getEspaciosExperto(idExperto).then((res) => {
       const {espacios} = res.data;
-      console.log(espacios);
       dispatch({type: ESPACIOS_RECIBIDOS, payload: espacios});
     });
   };

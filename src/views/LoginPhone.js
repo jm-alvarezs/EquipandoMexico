@@ -9,13 +9,19 @@ import {useNavigation} from '@react-navigation/native';
 const SignUp = () => {
   const [telefono, setTelefono] = useState('');
 
-  const {signInPhone, confirmation} = useContext(UserContext);
+  const {signInPhone, confirmation, spinner} = useContext(UserContext);
 
   const navigation = useNavigation();
 
   const handleSubmit = () => {
     signInPhone(telefono);
   };
+
+  useEffect(() => {
+    if (confirmation && confirmation !== null) {
+      navigation.navigate('Code');
+    }
+  }, []);
 
   useEffect(() => {
     if (confirmation) {
@@ -38,10 +44,11 @@ const SignUp = () => {
           autoCapitalize="none"
         />
         <Button
-          title="Entrar"
-          containerStyle={[style.mainButton]}
+          title={spinner ? 'Loading...' : 'Entrar'}
+          containerStyle={[spinner ? style.mainButtonInner : style.mainButton]}
           buttonStyle={[style.mainButtonInner]}
           onPress={handleSubmit}
+          disabled={spinner}
         />
       </Card>
       <View style={[style.padding, {paddingTop: 0}]}>

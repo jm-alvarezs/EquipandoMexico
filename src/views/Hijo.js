@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {TextInput} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {View, TextInput} from 'react-native';
 import {Button, Card, Text} from 'react-native-elements';
-import {style, text} from '../styles';
+import {layout, style, text} from '../styles';
 import Screen from './Screen';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from '../components/DatePicker';
@@ -56,6 +56,18 @@ const Hijo = () => {
           onPress={handleSubmit}
         />
       </Card>
+      <View style={[layout.row]}>
+        <Button
+          title="Cerrar Sesión"
+          containerStyle={[
+            style.mainButtonInner,
+            {width: 100, marginTop: 32, padding: 0},
+          ]}
+          buttonStyle={{backgroundColor: 'transparent', margin: 0, padding: 0}}
+          titleStyle={{color: colors.danger}}
+          onPress={signOut}
+        />
+      </View>
     </Screen>
   );
 };

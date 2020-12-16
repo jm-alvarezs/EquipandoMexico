@@ -9,13 +9,17 @@ import {useNavigation} from '@react-navigation/native';
 const Code = () => {
   const [code, setCode] = useState('');
 
-  const {confirmation, getUsuario} = useContext(UserContext);
+  const {confirmation, getUsuario, showSpinner, hideSpinner} = useContext(
+    UserContext,
+  );
 
   const navigation = useNavigation();
 
   const handleSubmit = async () => {
     try {
+      showSpinner();
       await confirmation.confirm(code);
+      hideSpinner();
       getUsuario();
     } catch (error) {
       throw error;

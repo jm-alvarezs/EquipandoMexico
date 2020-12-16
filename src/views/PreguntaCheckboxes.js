@@ -38,7 +38,9 @@ const PreguntaCheckboxes = () => {
               setPropiedadCognicion(opcion.idPreguntaCognicion, check)
             }
           />
-          <Text style={[text.p]}>{opcion.nombre}</Text>
+          <Text style={[text.p]}>
+            {opcion.nombre}: {opcion.descripcion}
+          </Text>
         </View>
       ));
     }

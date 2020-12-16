@@ -24,7 +24,10 @@ const Diagnostico = () => {
           <Text style={[text.h2]}>{resultado.nombre}</Text>
         </View>
         <View style={[layout.half]}>
-          <Text style={[text.h2]}>{resultado.porcentaje}</Text>
+          <Text style={[text.h2]}>
+            {parseFloat(resultado.porcentaje).toFixed(2)}
+            {'%'}
+          </Text>
         </View>
       </View>
     ));

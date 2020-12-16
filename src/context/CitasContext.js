@@ -45,10 +45,15 @@ export const CitasProvider = ({children}) => {
     CitasService.deleteCita(idCita);
   };
 
+  const setCita = (cita) => {
+    dispatch({type: SET_CITA, payload: cita});
+  };
+
   return (
     <CitasContext.Provider
       value={{
         ...state,
+        setCita,
         getCita,
         getMisCitas,
         postCita,

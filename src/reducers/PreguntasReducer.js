@@ -105,7 +105,8 @@ export default (state, {type, payload}) => {
     case SET_PREGUNTA_SI: {
       const preguntasSi = [...state.preguntasSi];
       const pregunta = preguntasSi[payload];
-      return {...state, pregunta};
+      console.log(pregunta);
+      return {...state, pregunta: {...pregunta}};
     }
     case SET_RESPUESTA_PREGUNTA_SI: {
       const preguntasSi = [...state.preguntasSi];

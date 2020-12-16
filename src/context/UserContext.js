@@ -27,6 +27,7 @@ const initialState = {
   cuenta: null,
   direccion: null,
   hijoCreated: null,
+  spinner: false,
 };
 
 export const UserContext = createContext(initialState);
@@ -149,9 +150,14 @@ export const UserProvider = ({children}) => {
   }
 
   function signInPhone(phone) {
-    AuthService.signInPhone(phone).then((confirmation) => {
-      dispatch({type: CONFIRM_RECIBIDO, payload: confirmation});
-    });
+    dispatch({type: SHOW_SPINNER});
+    AuthService.signInPhone(phone)
+      .then((confirmation) => {
+        dispatch({type: CONFIRM_RECIBIDO, payload: confirmation});
+      })
+      .catch(() => {
+        dispatch({type: HIDE_SPINNER});
+      });
   }
 
   function editarUsuario() {
@@ -259,6 +265,14 @@ export const UserProvider = ({children}) => {
     UsuarioService.putHijo({...hijo, nombre: hijo.nombre_hijo});
   }
 
+  function showSpinner() {
+    dispatch({type: SHOW_SPINNER});
+  }
+
+  function hideSpinner() {
+    dispatch({type: HIDE_SPINNER});
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -271,6 +285,8 @@ export const UserProvider = ({children}) => {
         cancelEdit,
         updateHijo,
         signInPhone,
+        showSpinner,
+        hideSpinner,
         userLoggedIn,
         updateUsuario,
         editarUsuario,
