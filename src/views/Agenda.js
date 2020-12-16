@@ -20,10 +20,18 @@ const Agenda = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  useEffect(() => {
+  navigation.addListener('focus', () => {
+    getEspaciosVista();
+  });
+
+  const getEspaciosVista = () => {
     const idExperto = route.params;
     getExperto(idExperto);
     getEspaciosExperto(idExperto);
+  };
+
+  useEffect(() => {
+    getEspaciosVista();
   }, []);
 
   const renderExperto = () => {

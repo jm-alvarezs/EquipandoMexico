@@ -9,6 +9,8 @@ export const displayError = (dispatch, error) => {
     if (error.response) {
       if (error.response.status === 412) {
         error = 'Ya existe una cuenta con ese número de teléfono.';
+      } else {
+        error = error.toString();
       }
     } else {
       error = error.toString();

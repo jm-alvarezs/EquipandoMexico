@@ -35,7 +35,9 @@ export const CitasProvider = ({children}) => {
 
   const postCita = (idEspacio) => {
     dispatch({type: SHOW_SPINNER});
-    CitasService.postCita(idEspacio).then(() => {
+    CitasService.postCita(idEspacio).then((res) => {
+      const {cita} = res.data;
+      dispatch({type: SET_CITA, payload: cita});
       dispatch({type: USER_CREATED});
     });
   };

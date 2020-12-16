@@ -16,6 +16,7 @@ const Confirmacion = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
+    console.log(created);
     if (created) {
       navigation.navigate('Gracias');
     }

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Text, View} from 'react-native';
 import {CitasContext} from '../context/CitasContext';
-import {style} from '../styles';
+import {style, text} from '../styles';
 import Screen from './Screen';
 
 const Gracias = () => {
@@ -22,8 +22,8 @@ const Gracias = () => {
   return (
     <Screen title="Equipando">
       <View style={[style.padding]}>
-        <Text>¡Gracias!</Text>
-        <Text>Cita Confirmada</Text>
+        <Text style={[text.h1, style.bold]}>¡Gracias!</Text>
+        <Text style={[text.h2, style.mt]}>Cita Confirmada</Text>
         {renderCita()}
       </View>
     </Screen>
