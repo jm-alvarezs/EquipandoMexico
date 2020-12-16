@@ -48,7 +48,7 @@ export default (state, {type, payload}) => {
       if (index !== -1) {
         preguntas[index].respuesta = payload.respuesta;
       }
-      return {...state, preguntas};
+      return {...state, preguntas, pregunta};
     }
     case SET_PROPIEDAD_USER: {
       return {...state, diagnostico: payload};

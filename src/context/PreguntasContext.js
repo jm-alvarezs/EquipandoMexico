@@ -62,6 +62,7 @@ export const PreguntasProvider = ({children}) => {
   }
 
   function getPregunta(idPregunta) {
+    console.log(idPregunta);
     dispatch({type: SET_PREGUNTA, payload: idPregunta});
   }
 
@@ -112,6 +113,7 @@ export const PreguntasProvider = ({children}) => {
   }
 
   const setRespuestaPregunta = (idPregunta, respuesta) => {
+    console.log(idPregunta, respuesta);
     dispatch({type: SET_RESPUESTA_PREGUNTA, payload: {idPregunta, respuesta}});
   };
 

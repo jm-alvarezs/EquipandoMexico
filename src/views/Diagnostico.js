@@ -22,23 +22,23 @@ const Diagnostico = () => {
       return (
         <View>
           <Text style={[text.h1, style.bold]}>Diagnóstico</Text>
-          <Text>Tu diagnóstico</Text>
-          <Text>{diagnostico}</Text>
-          <Text>¿Qué sigue?</Text>
+          <Text style={[text.h4, style.mt]}>Tu diagnóstico:</Text>
+          <Text style={[text.h2]}>{diagnostico.nombre}</Text>
+          <Text style={[text.h4, style.bold, style.mt]}>¿Qué sigue?</Text>
           <Text>
             Te ayudaremos con contenido especial para tú y tu hijo(a) para que
             su desarrollo se incorpore de manera adecuada.
           </Text>
           <Button
             title="Ver Contenido"
-            containerStyle={[styles.secondaryButton, style.shadow]}
-            buttonStyle={[styles.mainButtonInner]}
+            containerStyle={[style.mainButton, style.mt]}
+            buttonStyle={[style.mainButtonInner]}
             onPress={() => navigation.navigate('Contenido')}
           />
         </View>
       );
     }
-    return (
+    /*return (
       <View style={[layout.center]}>
         <Text style={[text.h2, style.bold, style.my]}>¡Completa el Test!</Text>
         <Text style={[style.mb, layout.center, text.h4]}>
@@ -51,12 +51,12 @@ const Diagnostico = () => {
           onPress={() => navigation.navigate('Cuestionario')}
         />
       </View>
-    );
+    );*/
   };
 
   return (
     <Screen title="Diagnóstico">
-      <View style={[style.padding, {paddingTop: 0}]}>
+      <View style={[style.padding, {paddingTop: 0, height: 800}]}>
         {renderDiagnostico()}
       </View>
     </Screen>
