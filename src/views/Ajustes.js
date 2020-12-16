@@ -85,7 +85,6 @@ const Ajustes = () => {
     <Screen title="Ajustes">
       <View style={[style.padding, {paddingTop: 0, height: 900}]}>
         <Text style={[text.h1, style.bold]}>Ajustes</Text>
-        <Text>Notificaciones</Text>
         <Text style={[text.h3, style.bold, style.mt]}>Datos de tu hijo(a)</Text>
         {renderUsuario()}
         <Button

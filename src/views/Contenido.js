@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import React, {useContext, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Linking} from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import {ContenidosContext} from '../context/ContenidosContext';
 import {style, text} from '../styles';
@@ -22,15 +22,24 @@ const Contenido = () => {
     if (contenido && contenido !== null) {
       const {nombre, descripcion, enlace} = contenido;
       return (
-        <View>
-          {renderAdjunto()}
+        <View style={[{width: '100%'}]}>
+          <View style={[{width: '100%'}]}>{renderAdjunto()}</View>
           <Text style={[text.h1, style.mb, style.bold]}>{nombre}</Text>
           <Text>{descripcion}</Text>
-          {enlace !== null && (
+          {enlace !== null && enlace !== '' && (
             <Button
               title="Más Información"
               containerStyle={[style.mainButton, style.mt]}
               buttonStyle={[style.mainButtonInner]}
+              onPress={() => {
+                Linking.canOpenURL(enlace).then((supported) => {
+                  if (supported) {
+                    Linking.openURL(enlace);
+                  } else {
+                    console.log("Don't know how to open URI: " + enlace);
+                  }
+                });
+              }}
             />
           )}
         </View>
@@ -41,11 +50,13 @@ const Contenido = () => {
   const renderAdjunto = () => {
     const src = `${BASE_URL}/adjuntos/${contenido.idAdjunto}`;
     if (['mp4', 'mov'].includes(contenido.tipoAdjunto)) {
+      const videoURL = `${src}.mp4`;
       return (
         <Video
-          source={{uri: src}}
-          style={{width: '100%', height: 200}}
+          source={{uri: videoURL}}
+          style={{flex: 1, width: '100%', height: 400}}
           controls
+          paused
         />
       );
     }

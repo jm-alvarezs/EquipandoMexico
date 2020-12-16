@@ -20,6 +20,8 @@ target 'EquipandoMexico' do
   pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
 
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
   target 'EquipandoMexicoTests' do
     inherit! :complete
     # Pods for testing

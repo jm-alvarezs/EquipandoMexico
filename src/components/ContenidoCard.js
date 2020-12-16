@@ -9,6 +9,8 @@ const ContenidoCard = ({contenido}) => {
   const navigation = useNavigation();
   const {idContenido, nombre, descripcion, idAdjunto} = contenido;
   const src = `${BASE_URL}/adjuntos/${idAdjunto}`;
+  const placeholder =
+    'https://www.geirangerfjord.no/upload/images/2018_general/film-and-vid.jpg';
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Contenido', {idContenido})}
@@ -19,7 +21,13 @@ const ContenidoCard = ({contenido}) => {
           padding: 0,
           borderRadius: 20,
         }}>
-        <Card.Image source={{uri: src}} />
+        <Card.Image
+          source={{
+            uri: ['mp4', 'mov'].includes(contenido.tipoAdjunto)
+              ? placeholder
+              : src,
+          }}
+        />
         <View style={[{paddingHorizontal: 24, paddingVertical: 12}]}>
           <Text style={[text.h3, style.bold]}>{nombre}</Text>
           <Text style={[text.p]}>
