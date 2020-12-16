@@ -21,7 +21,7 @@ export const ExpertosProvider = ({children}) => {
     });
   };
 
-  const getExperto = (idExperto) => {
+  const getExperto = ({idExperto}) => {
     ExpertosService.getExperto(idExperto).then((res) => {
       const {experto} = res.data;
       dispatch({type: SET_EXPERTO, payload: experto});

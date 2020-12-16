@@ -28,8 +28,8 @@ export const CitasProvider = ({children}) => {
     });
   };
 
-  const postCita = (cita) => {
-    CitasService.postCita(cita);
+  const postCita = (idEspacio) => {
+    CitasService.postCita(idEspacio);
   };
 
   const updateCita = (cita) => {

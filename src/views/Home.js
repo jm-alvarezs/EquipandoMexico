@@ -27,6 +27,7 @@ import PreguntaNo from './PreguntaNo';
 import PreguntaSi from './PreguntaSi';
 import PreguntaCheckboxes from './PreguntaCheckboxes';
 import Cuestionario from './Cuestionario';
+import Confirmacion from './Confirmacion';
 
 const Tab = createBottomTabNavigator();
 
@@ -130,6 +131,11 @@ const StackExpertos = () => {
       <ExpertosNavigator.Screen
         name="Agenda"
         component={Agenda}
+        options={{headerShown: false}}
+      />
+      <ExpertosNavigator.Screen
+        name="Confirmacion"
+        component={Confirmacion}
         options={{headerShown: false}}
       />
       <ExpertosNavigator.Screen

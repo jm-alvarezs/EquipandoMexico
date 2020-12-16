@@ -69,3 +69,4 @@ export const SET_PROPIEDAD_CITA = 'SET_PROPIEDAD_CITA';
  * Espacios
  */
 export const ESPACIOS_RECIBIDOS = 'ESPACIOS_RECIBIDOS';
+export const SET_ESPACIO = 'SET_ESPACIO';
